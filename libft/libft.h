@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 13:15:15 by acourtar          #+#    #+#             */
-/*   Updated: 2023/02/07 16:11:50 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/21 18:49:39 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 // Returns the number of nodes in the list 'lst'
 int		ft_lstsize(t_list *lst);
+// Reads file 'fd' and returns everything before the next newline it encounters
+char	*get_next_line(int fd);
 
 #endif

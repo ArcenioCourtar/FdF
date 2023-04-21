@@ -14,13 +14,15 @@ SRCFILES	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_lstlast.c ft_lstclear.c ft_lstiter.c ft_lstadd_front.c \
 	ft_lstadd_back.c ft_lstdelone.c ft_lstmap.c ft_isspace.c ft_atol.c \
 	ft_printf.c
-HEADERFILE	= libft.h
+GNLFILES	= get_next_line.c get_next_line_utils.c
+HEADERFILE	= libft.h get_next_line.h
 
 CFLAGS		= -Wall -Werror -Wextra
 
 # The files in OBJAFTER were added after libft's completion.
 
-OBJ_ALL := $(addprefix $(OBJDIR), $(SRCFILES:.c=.o))
+OBJ_ALL := $(addprefix $(OBJDIR), $(SRCFILES:.c=.o)) \
+$(addprefix $(OBJDIR), $(GNLFILES:.c=.o))
 SRC_ALL	:= $(addprefix $(SRCDIR), $(SRCFILES))
 # SRC_ALL := $(addprefix $(SRCDIR), $(SRC_ALL))
 # Commented out the flag since I want to add the bonus by default from now on
