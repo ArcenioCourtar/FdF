@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/04/21 18:54:37 by acourtar         ###   ########.fr        #
+#    Updated: 2023/04/22 16:12:09 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,9 @@ ALL_SRC		= $(addprefix $(DIR_SRC), $(SRCFILES))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MLX)
+$(NAME): $(LIBFT) $(MLX) $(ALL_OBJ)
 	@mkdir -p $(DIR_BIN)
-	$(CC) $(ALL_SRC) $(MLX) $(LIBFT) -Iinclude -Iinclude/MLX42 \
+	$(CC) $(CFLAGS) $(ALL_OBJ) $(MLX) $(LIBFT) -Iinclude -Iinclude/MLX42 \
 	-ldl -lglfw -pthread -lm -o $(NAME)
 
 re: fclean all
@@ -44,18 +44,19 @@ fclean:
 	$(MAKE) fclean -C libft
 	rm -rf $(DIR_OBJ) $(DIR_LIB) $(DIR_BIN) MLX42/build
 
-%.o: %.c
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c
+	@mkdir -p $(DIR_OBJ)
 	$(CC) -c -g $(CFLAGS) -o $@ $<
 
 $(LIBFT):
 	$(MAKE) -C libft
 	@mkdir -p $(DIR_LIB)
-	mv libft/libft.a $(LIBFT)
+	@mv libft/libft.a $(LIBFT)
 
 $(MLX):
-	cd MLX42 && cmake -B build && cd ..
+	@cd MLX42 && cmake -B build && cd ..
 	$(MAKE) -C MLX42/build
-	mv MLX42/build/libmlx42.a $(MLX)
-	cp -R MLX42/include/MLX42 include/
+	@mv MLX42/build/libmlx42.a $(MLX)
+	@cp -R MLX42/include/MLX42 include/
 
 .PHONY: clean fclean bonus re all
