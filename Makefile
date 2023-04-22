@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/04/22 16:12:09 by acourtar         ###   ########.fr        #
+#    Updated: 2023/04/22 16:24:35 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,10 @@ clean:
 fclean:
 	$(MAKE) fclean -C libft
 	rm -rf $(DIR_OBJ) $(DIR_LIB) $(DIR_BIN) MLX42/build
+
+turboclean:
+	$(MAKE) fclean -C libft
+	rm -rf $(DIR_OBJ) $(DIR_LIB) $(DIR_BIN) MLX42/build include/MLX42
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c
 	@mkdir -p $(DIR_OBJ)
