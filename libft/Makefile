@@ -1,8 +1,18 @@
-CC			= cc
-NAME		= libft.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/22 15:45:59 by acourtar          #+#    #+#              #
+#    Updated: 2023/04/22 15:46:03 by acourtar         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-OBJDIR		= obj/
-SRCDIR		= src/
+NAME		= libft.a
+CC			= cc
+CFLAGS		= -Wall -Werror -Wextra
 
 SRCFILES	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c \
@@ -15,41 +25,33 @@ SRCFILES	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_lstadd_back.c ft_lstdelone.c ft_lstmap.c ft_isspace.c ft_atol.c \
 	ft_printf.c
 GNLFILES	= get_next_line.c get_next_line_utils.c
-HEADERFILE	= libft.h get_next_line.h
+HEADERFILE	= $(INCLDIR)libft.h $(INCLDIR)get_next_line.h
 
-CFLAGS		= -Wall -Werror -Wextra
-
-# The files in OBJAFTER were added after libft's completion.
-
+INCLDIR		= include/
+OBJDIR		= obj/
+SRCDIR		= src/
 OBJ_ALL := $(addprefix $(OBJDIR), $(SRCFILES:.c=.o)) \
 $(addprefix $(OBJDIR), $(GNLFILES:.c=.o))
 SRC_ALL	:= $(addprefix $(SRCDIR), $(SRCFILES))
-# SRC_ALL := $(addprefix $(SRCDIR), $(SRC_ALL))
-# Commented out the flag since I want to add the bonus by default from now on
-# ifdef COMP_BONUS
-# OBJ_ALL := $(OBJFILES) $(OBJBONUS) $(OBJAFTER)
-# else
-# OBJ_ALL := $(OBJFILES)
-# endif
+
+#------------------------------------------------------------------------
 
 all: $(NAME)	
 
 $(NAME): $(OBJ_ALL)
-	ar -rcs $@ $^
+	@ar -rcs $@ $^
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(HEADERFILE)
 	@mkdir -p $(@D)
-	$(CC) -I. -c $(CFLAGS) -o $@ $<
+	@$(CC) -Iinclude -c $(CFLAGS) -o $@ $<
 
 re: fclean all
 
 clean:
-	rm -f $(OBJ_ALL)
-	rmdir $(OBJDIR)
+	@rm -rf $(OBJDIR)
 
 fclean:
-	rm -f $(OBJ_ALL) $(NAME)
-	rmdir $(OBJDIR)
+	@rm -rf $(OBJDIR) $(NAME)
 
 bonus:
 	@$(MAKE)

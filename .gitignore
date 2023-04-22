@@ -1,8 +1,10 @@
+include/MLX42/
+bin/
+lib/
+obj/
 .DS_Store
 .vscode
 *test*
 *.o
 *.a
-obj
-FdF
 a.out
