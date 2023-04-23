@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/04/22 16:24:35 by acourtar         ###   ########.fr        #
+#    Updated: 2023/04/23 11:09:41 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ DIR_LIB		= lib/
 
 ALL_OBJ		= $(addprefix $(DIR_OBJ), $(SRCFILES:.c=.o))
 ALL_SRC		= $(addprefix $(DIR_SRC), $(SRCFILES))
+PLATFORM	= $(shell uname)
 
 #----------------------------------------------------------------------------
 
@@ -31,8 +32,12 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(ALL_OBJ)
 	@mkdir -p $(DIR_BIN)
+ifeq ($(PLATFORM), Linux)
 	$(CC) $(CFLAGS) $(ALL_OBJ) $(MLX) $(LIBFT) -Iinclude -Iinclude/MLX42 \
 	-ldl -lglfw -pthread -lm -o $(NAME)
+else
+	echo "Test"
+endif
 
 re: fclean all
 
@@ -62,5 +67,8 @@ $(MLX):
 	$(MAKE) -C MLX42/build
 	@mv MLX42/build/libmlx42.a $(MLX)
 	@cp -R MLX42/include/MLX42 include/
+
+platform:
+	@echo $(PLATFORM)
 
 .PHONY: clean fclean bonus re all

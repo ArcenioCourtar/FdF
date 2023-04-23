@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/23 11:04:51 by acourtar         ###   ########.fr       */
+/*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
+/*   Updated: 2023/04/23 10:53:20 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/MLX42/MLX42.h"
-#include "../include/libft.h"
-#include "../include/fdf.h"
+#ifndef FDF_H
+# define FDF_H
+# include <stddef.h>
+# include <math.h>
 
-int	main(void)
-{
-	void	*mlx;
-
-	mlx = mlx_init(256, 256, "yo", false);
-	mlx_loop(mlx);
-}
+#endif
