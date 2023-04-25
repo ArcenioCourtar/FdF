@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/04/25 13:46:50 by acourtar         ###   ########.fr        #
+#    Updated: 2023/04/25 13:56:10 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ ifeq ($(PLATFORM), Linux)
 else ifeq ($(PLATFORM), Darwin)
 	@echo "Compiling for 42Schools Mac, user: $(USER)"
 	$(CC) $(CFLAGS) $(ALL_OBJ) $(MLX) $(LIBFT) -Iinclude -Iinclude/MLX42 \
-	-ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -o $(NAME)
+	-ldl -lm -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -o $(NAME)
 else
 	echo "can't find platform"
 endif
