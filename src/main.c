@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/25 17:50:40 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:17:00 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*read_file(int fd)
 	{
 		ft_bzero(buffer, 1001);
 		bytesread = read(fd, buffer, 1000);
+		ft_printf("bytes read: %i\n", bytesread);
 		if (bytesread <= 0)
 			return (str);
 		if (str == NULL)
@@ -89,6 +90,54 @@ char	*read_file(int fd)
 	}
 }
 
+int	valid_map(char *str)
+{
+	int	i;
+	int	col_max;
+	int	col;
+	int	total;
+
+	i = 0;
+	col_max = -1;
+	col = 0;
+	total = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+			i++;
+		else if ((str[i] == '-' || str[i] == '+') && ft_isdigit(str[i + 1]))
+			i++;
+		else if (ft_isdigit(str[i]))
+		{
+			if (i == 0 || str[i - 1] == ' ' || str[i - 1] == '-' \
+			|| str[i - 1] == '+' || str[i - 1] == '\n')
+			{
+				col++;
+				total++;
+			}
+			i++;
+		}
+		else if (str[i] == '\n')
+		{
+			if (col_max == -1)
+				col_max = col;
+			else if (col_max != col)
+			{
+				ft_printf("Wrong cols. expect: %i, found: %i\n", col_max, col);
+				exit(EXIT_SUCCESS);
+			}
+			col = 0;
+			i++;
+		}
+		else
+		{
+			ft_printf("incorrect formatting\n");
+			exit(EXIT_FAILURE);
+		}
+	}
+	return (total);
+}
+
 /* 
 	fdf given by 42Schools:
 	Runs without newline after last row.
@@ -98,17 +147,57 @@ char	*read_file(int fd)
 	Numbers with multiple operators (++1, --1, +-1) lead to undefined behaviour
 	it does not mark it as an invalid map though.
 */
-void	valid_check(int argc, char **argv)
+char	*valid_check(int argc, char **argv, int *nodes)
 {
 	int		fd;
 	char	*str;
 
 	fd = valid_args(argc, argv);
 	str = read_file(fd);
-	ft_printf("test:\n%s", str);
+	if (str == NULL)
+		exit(EXIT_SUCCESS);
+	*nodes = valid_map(str);
+	return (str);
+}
+
+void	alloc_nodes(t_data *dat)
+{
+	t_coords	*new;
+	int			i;
+
+	new = malloc(sizeof(t_coords) * dat->nodes);
+	if (new == NULL)
+		exit(EXIT_FAILURE);
+	i = 0;
+	while (i < dat->nodes)
+	{
+		new[i].x = i;
+		new[i].y = i;
+		new[i].z = i;
+		i++;
+	}
+	dat->cor = new;
+}
+
+void	print_coords(t_data *dat)
+{
+	int	i;
+
+	i = 0;
+	while (i < dat->nodes)
+	{
+		ft_printf("n: %i, x: %i, y: %i, z: %i\n", i, dat->cor[i].x, dat->cor[i].y, \
+		dat->cor[i].z);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
-{
-	valid_check(argc, argv);
+{	
+	t_data	dat;
+
+	dat.str = valid_check(argc, argv, &dat.nodes);
+	ft_printf("map:\n%s|\nnodes: %i\n", dat.str, dat.nodes);
+	alloc_nodes(&dat);
+	print_coords(&dat);
 }

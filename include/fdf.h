@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/25 14:03:50 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:10:36 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,15 @@
 # include <stdio.h>		// perror()
 # include <string.h>	// strerror()
 
+typedef struct s_data {
+	struct s_coords	*cor;
+	char			*str;
+	int				nodes;
+}	t_data;
+
+typedef struct s_coords {
+	int	x;
+	int	y;
+	int	z;
+}	t_coords;
 #endif
