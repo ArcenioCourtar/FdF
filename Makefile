@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/04/23 11:09:41 by acourtar         ###   ########.fr        #
+#    Updated: 2023/04/25 13:46:50 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,15 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(MLX) $(ALL_OBJ)
 	@mkdir -p $(DIR_BIN)
 ifeq ($(PLATFORM), Linux)
+	@echo "Compiling for Linux"
 	$(CC) $(CFLAGS) $(ALL_OBJ) $(MLX) $(LIBFT) -Iinclude -Iinclude/MLX42 \
 	-ldl -lglfw -pthread -lm -o $(NAME)
+else ifeq ($(PLATFORM), Darwin)
+	@echo "Compiling for 42Schools Mac, user: $(USER)"
+	$(CC) $(CFLAGS) $(ALL_OBJ) $(MLX) $(LIBFT) -Iinclude -Iinclude/MLX42 \
+	-ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -o $(NAME)
 else
-	echo "Test"
+	echo "can't find platform"
 endif
 
 re: fclean all
