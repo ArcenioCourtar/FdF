@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/25 16:24:47 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/25 17:50:40 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,15 @@ char	*read_file(int fd)
 	}
 }
 
+/* 
+	fdf given by 42Schools:
+	Runs without newline after last row.
+	Runs if file name does not end in .fdf.
+	Runs regardless of the # of spaces in between numbers,
+	and spaces at the start or end of rows.
+	Numbers with multiple operators (++1, --1, +-1) lead to undefined behaviour
+	it does not mark it as an invalid map though.
+*/
 void	valid_check(int argc, char **argv)
 {
 	int		fd;
