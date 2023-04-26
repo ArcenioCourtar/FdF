@@ -6,13 +6,19 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/26 13:45:55 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:46:02 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/MLX42/MLX42.h"
 #include "../include/libft.h"
 #include "../include/fdf.h"
+
+/*
+	TODO: Norm compliance
+	Handling int over/underflow
+	more rigorous testing of map validity
+*/
 
 static int	valid_args(int argc, char **argv)
 {
