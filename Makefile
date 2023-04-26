@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/04/25 13:56:10 by acourtar         ###   ########.fr        #
+#    Updated: 2023/04/26 15:43:15 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,14 @@ NAME		= $(DIR_BIN)FdF
 LIBFT		= $(DIR_LIB)libft.a
 MLX			= $(DIR_LIB)libmlx42.a
 CFLAGS		= -Wall -Werror -Wextra
-SRCFILES	= main.c
+SRCFILES	= main.c parsing.c alloc_coords.c debug_func.c
+HEADERFILES	= $(DIR_INC)libft.h $(DIR_INC)fdf.h
 
 DIR_BIN		= bin/
 DIR_SRC		= src/
 DIR_OBJ		= obj/
 DIR_LIB		= lib/
+DIR_INC		= include/
 
 ALL_OBJ		= $(addprefix $(DIR_OBJ), $(SRCFILES:.c=.o))
 ALL_SRC		= $(addprefix $(DIR_SRC), $(SRCFILES))
@@ -58,7 +60,7 @@ turboclean:
 	$(MAKE) fclean -C libft
 	rm -rf $(DIR_OBJ) $(DIR_LIB) $(DIR_BIN) MLX42/build include/MLX42
 
-$(DIR_OBJ)%.o: $(DIR_SRC)%.c
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c $(HEADERFILES)
 	@mkdir -p $(DIR_OBJ)
 	$(CC) -c -g $(CFLAGS) -o $@ $<
 

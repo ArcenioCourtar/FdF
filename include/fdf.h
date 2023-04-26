@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/25 19:10:36 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:42:38 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_data {
 	struct s_coords	*cor;
 	char			*str;
 	int				nodes;
+	int				width;
 }	t_data;
 
 typedef struct s_coords {
@@ -31,4 +32,9 @@ typedef struct s_coords {
 	int	y;
 	int	z;
 }	t_coords;
+
+char	*valid_check(int argc, char **argv, int *nodes, int *width);
+void	alloc_nodes(t_data *dat);
+void	print_coords(t_data *dat);
+
 #endif
