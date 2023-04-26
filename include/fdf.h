@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/26 15:42:38 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:05:04 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct s_coords {
 
 char	*valid_check(int argc, char **argv, int *nodes, int *width);
 void	alloc_nodes(t_data *dat);
-void	print_coords(t_data *dat);
+
+// debug functions
+void	print_coords(t_data const *dat);
+void	print_map(t_data const *dat);
+void	print_info(t_data const *dat);
 
 #endif

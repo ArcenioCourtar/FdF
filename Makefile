@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/04/26 15:43:15 by acourtar         ###   ########.fr        #
+#    Updated: 2023/04/26 16:15:55 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,4 +78,4 @@ $(MLX):
 platform:
 	@echo $(PLATFORM)
 
-.PHONY: clean fclean bonus re all
+.PHONY: clean fclean re all libmlx42

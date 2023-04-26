@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:42:09 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/26 15:42:29 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:03:34 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
-void	print_coords(t_data *dat)
+void	print_coords(t_data const *dat)
 {
 	int	i;
 
@@ -25,4 +25,14 @@ void	print_coords(t_data *dat)
 		dat->cor[i].y, dat->cor[i].z);
 		i++;
 	}
+}
+
+void	print_map(t_data const *dat)
+{
+	ft_printf("\n%s\n", dat->str);
+}
+
+void	print_info(t_data const *dat)
+{
+	ft_printf("\nNodes: %i, width %i\n", dat->nodes, dat->width);
 }

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/26 15:46:02 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:59:00 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static char	*read_file(int fd)
 	{
 		ft_bzero(buffer, 1001);
 		bytesread = read(fd, buffer, 1000);
-		ft_printf("bytes read: %i\n", bytesread);
 		if (bytesread <= 0)
 			return (str);
 		if (str == NULL)
