@@ -6,12 +6,14 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/26 16:05:04 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/30 13:10:50 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+# define WIDTH 512
+# define HEIGHT 512
 # include <stddef.h>
 # include <math.h>		// all math functions
 # include <fcntl.h>		// open()
@@ -21,6 +23,8 @@
 # include <string.h>	// strerror()
 
 typedef struct s_data {
+	mlx_t			*mlx;
+	mlx_image_t		*img;
 	struct s_coords	*cor;
 	char			*str;
 	int				nodes;

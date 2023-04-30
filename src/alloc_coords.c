@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/26 15:51:03 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/04/30 13:12:39 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ void	alloc_nodes(t_data *dat)
 		i++;
 	}
 	dat->cor = new;
+	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
+	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
 }
