@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/01 10:55:44 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:45:07 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static t_coords	calc_coords(t_data *dat, int i)
 
 	strpos = 0;
 	numflag = 0;
-	new.x = i % dat->width;
-	new.y = i / dat->width;
+	new.x = i % dat->width * 10;
+	new.y = i / dat->width * 10;
 	while (1)
 	{
 		if (dat->str[j] == '-' || dat->str[j] == '+' || ft_isdigit(dat->str[j]))
@@ -60,6 +60,6 @@ void	alloc_nodes(t_data *dat)
 		i++;
 	}
 	dat->cor = new;
-	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
-	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
+	// dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
+	// dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
 }
