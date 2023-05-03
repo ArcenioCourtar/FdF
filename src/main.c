@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/02 23:07:41 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:04:52 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	vector_testing(t_data *dat)
 
 	srand(time(NULL));
 	k = rand() % dat->nodes;
-	k = 0;
 	printf("Node %i: %f, %f, %f\n", k, dat->cor[k].x, dat->cor[k].y, dat->cor[k].z);
 	len = 0;
 	if (!(dat->cor[k].x == 0 && dat->cor[k].y == 0 && dat->cor[k].z == 0))
@@ -31,14 +30,14 @@ void	vector_testing(t_data *dat)
 	printf("vector len: %i, %f\n", (int)len, len);
 }
 
-t_coords	assign_val(int x, int y, int z)
-{
-	t_coords new;
+// t_coords	assign_val(int x, int y, int z)
+// {
+// 	t_coords new;
 
-	new.x = x;
-	new.y = y;
-	new.z = z;
-}
+// 	new.x = x;
+// 	new.y = y;
+// 	new.z = z;
+// }
 
 /*
 	NO GLOBAL VARIABLES!!!!!
@@ -46,14 +45,14 @@ t_coords	assign_val(int x, int y, int z)
 int	main(int argc, char **argv)
 {	
 	t_data		dat;
-	t_coords	a, b, c;
+	// t_coords	a, b, c;
 
 	dat.str = valid_check(argc, argv, &dat.nodes, &dat.width);
 	alloc_nodes(&dat);
-	// debug_print_map(&dat);
-	// vector_testing(&dat);
-	// mlx_image_to_window(dat.mlx, dat.img, 0, 0);
-	// mlx_loop(dat.mlx);
-	// mlx_terminate(dat.mlx);
+	debug_print_map(&dat);
+	vector_testing(&dat);
+	mlx_image_to_window(dat.mlx, dat.img, 0, 0);
+	mlx_loop(dat.mlx);
+	mlx_terminate(dat.mlx);
 	return (0);
 }
