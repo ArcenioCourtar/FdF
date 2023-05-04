@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/04 14:13:16 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:06:06 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /*
 	TODO: implement overflow/underflow checks here?
 */
-static t_coords	calc_coords(t_data *dat, int i, int j)
+static t_coords	calc_coords(t_data *dat, int x, int y)
 {
 	static int	s = 0;
 	char		str_num[12];
@@ -27,8 +27,8 @@ static t_coords	calc_coords(t_data *dat, int i, int j)
 
 	strpos = 0;
 	numflag = 0;
-	new.x = i * 10;
-	new.y = j * 10;
+	new.x = x * 10;
+	new.y = y * 10;
 	new.w = 1;
 	while (1)
 	{
@@ -53,8 +53,8 @@ void	alloc_nodes(t_data *dat)
 {
 	t_coords	**new;
 	t_coords	**rot;
-	int			i;
-	int			j;
+	int			y;
+	int			x;
 
 	new = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
 	if (new == NULL)
@@ -62,29 +62,29 @@ void	alloc_nodes(t_data *dat)
 	rot = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
 	if (rot == NULL)
 		exit(EXIT_FAILURE);
-	i = 0;
-	while (i < dat->nodes / dat->width)
+	y = 0;
+	while (y < dat->nodes / dat->width)
 	{
-		new[i] = malloc(sizeof(t_coords) * dat->width);
+		new[y] = malloc(sizeof(t_coords) * dat->width);
 		if (new == NULL)
 			exit(EXIT_FAILURE);
-		rot[i] = malloc(sizeof(t_coords) * dat->width);
+		rot[y] = malloc(sizeof(t_coords) * dat->width);
 		if (rot == NULL)
 			exit(EXIT_FAILURE);
-		i++;
+		y++;
 	}
-	i = 0;
-	j = 0;
-	while (i < dat->nodes / dat->width)
+	y = 0;
+	x = 0;
+	while (y < dat->nodes / dat->width)
 	{
-		while (j < dat->width)
+		while (x < dat->width)
 		{
-			new[i][j] = calc_coords(dat, i, j);
-			rot[i][j] = new[i][j];
-			j++;
+			new[y][x] = calc_coords(dat, x, y);
+			rot[y][x] = new[y][x];
+			x++;
 		}
-		j = 0;
-		i++;
+		x = 0;
+		y++;
 	}
 	dat->cor = new;
 	dat->rot = rot;

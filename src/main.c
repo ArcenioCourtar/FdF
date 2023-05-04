@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/04 15:55:56 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:12:12 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	translate_coords(t_data *dat, int sx, int sy, int sz)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
-		dat->rot[x][y].x += sx;
-		dat->rot[x][y].y += sy;
-		dat->rot[x][y].z += sz;
-		dat->rot[x][y].w = 1;
+		dat->rot[y][x].x += sx;
+		dat->rot[y][x].y += sy;
+		dat->rot[y][x].z += sz;
+		dat->rot[y][x].w = 1;
 		i++;
 	}
 }
@@ -53,7 +53,7 @@ void	place_pixels(t_data *dat)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
-		mlx_put_pixel(dat->img, dat->rot[x][y].x, dat->rot[x][y].y, COL_WHT);
+		mlx_put_pixel(dat->img, dat->rot[y][x].x, dat->rot[y][x].y, COL_WHT);
 		i++;
 	}
 }
@@ -69,10 +69,10 @@ int	main(int argc, char **argv)
 	dat.str = valid_check(argc, argv, &dat.nodes, &dat.width);
 	alloc_nodes(&dat);
 	debug_print_coords(&dat);
-	// mlx_image_to_window(dat.mlx, dat.img, 0, 0);
-	// translate_coords(&dat, WIDTH / 2, HEIGHT / 2, 0);
-	// place_pixels(&dat);
-	// mlx_loop(dat.mlx);
-	// mlx_terminate(dat.mlx);
+	mlx_image_to_window(dat.mlx, dat.img, 0, 0);
+	translate_coords(&dat, WIDTH / 2, HEIGHT / 2, 0);
+	place_pixels(&dat);
+	mlx_loop(dat.mlx);
+	mlx_terminate(dat.mlx);
 	return (0);
 }
