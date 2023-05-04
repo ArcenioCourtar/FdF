@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/03 19:03:36 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:31:06 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
+/*
+	TODO: implement overflow/underflow checks here?
+*/
 static t_coords	calc_coords(t_data *dat, int i)
 {
 	static int	j = 0;
