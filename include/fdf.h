@@ -6,14 +6,20 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/01 12:35:53 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:24:53 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define WIDTH 512
-# define HEIGHT 512
+# define WIDTH	1024
+# define HEIGHT	1024
+# define COL_WHT	0xFFFFFFFFu
+# define COL_RED	0xFF0000FFu
+# define COL_GRN	0x00FF00FFu
+# define COL_BLU	0x0000FFFFu
+# define COL_BLK	0x000000FFu
+# include "MLX42/MLX42.h"
 # include <stddef.h>
 # include <math.h>		// all math functions
 # include <fcntl.h>		// open()
@@ -25,7 +31,8 @@
 typedef struct s_data {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	struct s_coords	*cor;
+	struct s_coords	**cor;
+	struct s_coords	**rot;
 	char			*str;
 	int				nodes;
 	int				width;
@@ -35,6 +42,7 @@ typedef struct s_coords {
 	double	x;
 	double	y;
 	double	z;
+	double	w;
 }	t_coords;
 
 char	*valid_check(int argc, char **argv, int *nodes, int *width);

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/03 19:04:52 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:08:50 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,62 @@
 #include <time.h> // ILLEGAL!!1
 #define BPP 4
 
-void	vector_testing(t_data *dat)
-{
-	int		k;
-	double	len;
+// void	rotate_plane_y(t_data *dat, double rad)
+// {
+// 	double	m[4][4];
 
-	srand(time(NULL));
-	k = rand() % dat->nodes;
-	printf("Node %i: %f, %f, %f\n", k, dat->cor[k].x, dat->cor[k].y, dat->cor[k].z);
-	len = 0;
-	if (!(dat->cor[k].x == 0 && dat->cor[k].y == 0 && dat->cor[k].z == 0))
-		len = sqrt(dat->cor[k].x * dat->cor[k].x + dat->cor[k].y * dat->cor[k].y + dat->cor[k].z * dat->cor[k].z);
-	printf("vector len: %i, %f\n", (int)len, len);
+// 	m[0][0] = cos(rad);
+// }
+
+void	translate_coords(t_data *dat, int sx, int sy, int sz)
+{
+	int	i;
+	int	x;
+	int	y;
+
+	i = 0;
+	while (i < dat->nodes)
+	{
+		x = i % dat->width;
+		y = i / dat->width;
+		dat->rot[x][y].x += sx;
+		dat->rot[x][y].y += sy;
+		dat->rot[x][y].z += sz;
+		dat->rot[x][y].w = 1;
+		i++;
+	}
 }
 
-// t_coords	assign_val(int x, int y, int z)
-// {
-// 	t_coords new;
+void	place_pixels(t_data *dat)
+{
+	int	i;
+	int	x;
+	int	y;
 
-// 	new.x = x;
-// 	new.y = y;
-// 	new.z = z;
-// }
+	i = 0;
+	while (i < dat->nodes)
+	{
+		x = i % dat->width;
+		y = i / dat->width;
+		mlx_put_pixel(dat->img, dat->rot[x][y].x, dat->rot[x][y].y, COL_WHT);
+		i++;
+	}
+}
 
 /*
 	NO GLOBAL VARIABLES!!!!!
+	transformation order: SCALE, ROTATE, TRANSLATE
 */
 int	main(int argc, char **argv)
 {	
 	t_data		dat;
-	// t_coords	a, b, c;
 
 	dat.str = valid_check(argc, argv, &dat.nodes, &dat.width);
 	alloc_nodes(&dat);
-	debug_print_map(&dat);
-	vector_testing(&dat);
+	debug_print_coords(&dat);
 	mlx_image_to_window(dat.mlx, dat.img, 0, 0);
+	translate_coords(&dat, WIDTH / 2, HEIGHT / 2, 0);
+	place_pixels(&dat);
 	mlx_loop(dat.mlx);
 	mlx_terminate(dat.mlx);
 	return (0);
