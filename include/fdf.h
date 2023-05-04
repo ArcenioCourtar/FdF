@@ -6,14 +6,15 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/04 13:24:53 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:00:22 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define WIDTH	1024
-# define HEIGHT	1024
+# define BUFFSIZ	1000
+# define WIDTH		1024
+# define HEIGHT		1024
 # define COL_WHT	0xFFFFFFFFu
 # define COL_RED	0xFF0000FFu
 # define COL_GRN	0x00FF00FFu

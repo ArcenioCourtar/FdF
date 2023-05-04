@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/04/26 16:59:00 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:59:52 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ static char	*concat_str(char *old, char buffer[1001])
 
 static char	*read_file(int fd)
 {
-	char	buffer[1001];
+	char	buffer[BUFFSIZ + 1];
 	char	*str;
 	int		bytesread;
 
 	str = NULL;
 	while (1)
 	{
-		ft_bzero(buffer, 1001);
-		bytesread = read(fd, buffer, 1000);
+		ft_bzero(buffer, BUFFSIZ + 1);
+		bytesread = read(fd, buffer, BUFFSIZ);
 		if (bytesread <= 0)
 			return (str);
 		if (str == NULL)
@@ -87,6 +87,7 @@ static char	*read_file(int fd)
 			if (str == NULL)
 				exit(EXIT_FAILURE);
 			ft_memcpy(str, buffer, bytesread);
+			str[bytesread] = '\0';
 		}		
 		else
 			str = concat_str(str, buffer);

@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/04/26 16:15:55 by acourtar         ###   ########.fr        #
+#    Updated: 2023/05/04 16:01:56 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,13 @@ endif
 
 re: fclean all
 
+cleanmini:
+	rm -rf $(DIR_OBJ) $(DIR_LIB) $(DIR_BIN)
+
+remini:
+	rm -rf $(DIR_OBJ) $(DIR_LIB) $(DIR_BIN)
+	$(MAKE)
+
 clean:
 	$(MAKE) clean -C libft
 	rm -rf $(DIR_OBJ) $(DIR_LIB) MLX42/build
@@ -77,5 +84,20 @@ $(MLX):
 
 platform:
 	@echo $(PLATFORM)
+
+sanadd: cleanmini $(LIBFT) $(MLX) $(ALL_OBJ)
+	@mkdir -p $(DIR_BIN)
+ifeq ($(PLATFORM), Linux)
+	@echo "Compiling for Linux"
+	$(CC) $(CFLAGS) $(ALL_OBJ) $(MLX) $(LIBFT) -Iinclude -Iinclude/MLX42 \
+	-ldl -lglfw -pthread -lm -fsanitize=address -o $(NAME)
+else ifeq ($(PLATFORM), Darwin)
+	@echo "Compiling for 42Schools Mac, user: $(USER)"
+	$(CC) $(CFLAGS) $(ALL_OBJ) $(MLX) $(LIBFT) -Iinclude -Iinclude/MLX42 \
+	-ldl -lm -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" \
+	-fsanitize=address -o $(NAME)
+else
+	echo "can't find platform"
+endif
 
 .PHONY: clean fclean re all libmlx42

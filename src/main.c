@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/04 14:08:50 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:55:56 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int	main(int argc, char **argv)
 	dat.str = valid_check(argc, argv, &dat.nodes, &dat.width);
 	alloc_nodes(&dat);
 	debug_print_coords(&dat);
-	mlx_image_to_window(dat.mlx, dat.img, 0, 0);
-	translate_coords(&dat, WIDTH / 2, HEIGHT / 2, 0);
-	place_pixels(&dat);
-	mlx_loop(dat.mlx);
-	mlx_terminate(dat.mlx);
+	// mlx_image_to_window(dat.mlx, dat.img, 0, 0);
+	// translate_coords(&dat, WIDTH / 2, HEIGHT / 2, 0);
+	// place_pixels(&dat);
+	// mlx_loop(dat.mlx);
+	// mlx_terminate(dat.mlx);
 	return (0);
 }
