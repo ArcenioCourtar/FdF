@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/06 16:03:47 by acourtar         ###   ########.fr       */
+/*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
+/*   Updated: 2023/05/06 16:03:41 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/MLX42/MLX42.h"
 #include "../include/libft.h"
 #include "../include/fdf.h"
-#include <time.h> // ILLEGAL!!1
-#define BPP 4
 
-/*
-	NO GLOBAL VARIABLES!!!!!
-	transformation order: SCALE, ROTATE, TRANSLATE
-*/
-int	main(int argc, char **argv)
-{	
-	t_data		dat;
+void	place_pixels(t_data *dat)
+{
+	int	i;
+	int	x;
+	int	y;
 
-	dat.str = valid_check(argc, argv, &dat.nodes, &dat.width);
-	alloc_nodes(&dat);
-	mlx_image_to_window(dat.mlx, dat.img, 0, 0);
-	rot_points(&dat, M_PI / 4, ROT_Z);
-	translate_coords(&dat, WIDTH / 2, 0, 0);
-	place_pixels(&dat);
-	mlx_loop(dat.mlx);
-	mlx_terminate(dat.mlx);
-	return (0);
+	i = 0;
+	while (i < dat->nodes)
+	{
+		x = i % dat->width;
+		y = i / dat->width;
+		if (dat->rot[y][x].x >= 0 && dat->rot[y][x].y >= 0 && \
+		dat->rot[y][x].x <= WIDTH && dat->rot[y][x].y <= HEIGHT)
+			mlx_put_pixel(dat->img, dat->rot[y][x].x, dat->rot[y][x].y, COL_WHT);
+		i++;
+	}
 }

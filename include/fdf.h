@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/04 16:25:08 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:04:22 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data {
 	char			*str;
 	int				nodes;
 	int				width;
+	double			mat[4][4];
 }	t_data;
 
 typedef struct s_coords {
@@ -46,8 +47,18 @@ typedef struct s_coords {
 	double	w;
 }	t_coords;
 
+typedef enum e_mat {
+	ROT_X,
+	ROT_Y,
+	ROT_Z
+}	t_mat;
+
 char	*valid_check(int argc, char **argv, int *nodes, int *width);
 void	alloc_nodes(t_data *dat);
+void	set_matrix_identity(double mat[4][4]);
+void	rot_points(t_data *dat, double rad, t_mat rot);
+void	translate_coords(t_data *dat, int sx, int sy, int sz);
+void	place_pixels(t_data *dat);
 
 // debug functions
 void	debug_print_coords(t_data const *dat);
