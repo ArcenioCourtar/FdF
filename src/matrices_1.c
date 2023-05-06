@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:41:38 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/06 16:03:55 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:33:39 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
-void	translate_coords(t_data *dat, int sx, int sy, int sz)
+void	translate_coords(t_data *dat, t_coords **con, int tr[3])
 {
 	int	i;
 	int	x;
@@ -25,10 +25,10 @@ void	translate_coords(t_data *dat, int sx, int sy, int sz)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
-		dat->rot[y][x].x += sx;
-		dat->rot[y][x].y += sy;
-		dat->rot[y][x].z += sz;
-		dat->rot[y][x].w = 1;
+		con[y][x].x += tr[0];
+		con[y][x].y += tr[1];
+		con[y][x].z += tr[2];
+		con[y][x].w = 1;
 		i++;
 	}
 }
@@ -107,6 +107,23 @@ void	rot_points(t_data *dat, double rad, t_mat rot)
 	while (i < dat->nodes)
 	{
 		matrix_mult(dat, i);
+		i++;
+	}
+}
+
+
+void	copy_coords(t_data *dat, t_coords **src, t_coords **dest)
+{
+	int	i;
+	int	x;
+	int	y;
+
+	i = 0;
+	while (i < dat->nodes)
+	{
+		x = i % dat->width;
+		y = i / dat->width;
+		dest[y][x] = src[y][x];
 		i++;
 	}
 }

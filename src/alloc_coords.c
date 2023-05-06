@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/06 14:26:34 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:10:41 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	alloc_nodes(t_data *dat)
 {
 	t_coords	**new;
 	t_coords	**rot;
+	t_coords	**cam;
 	int			y;
 	int			x;
 
@@ -62,6 +63,9 @@ void	alloc_nodes(t_data *dat)
 	rot = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
 	if (rot == NULL)
 		exit(EXIT_FAILURE);
+	cam = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
+	if (cam == NULL)
+		exit(EXIT_FAILURE);
 	y = 0;
 	while (y < dat->nodes / dat->width)
 	{
@@ -70,6 +74,9 @@ void	alloc_nodes(t_data *dat)
 			exit(EXIT_FAILURE);
 		rot[y] = malloc(sizeof(t_coords) * dat->width);
 		if (rot == NULL)
+			exit(EXIT_FAILURE);
+		cam[y] = malloc(sizeof(t_coords) * dat->width);
+		if (cam == NULL)
 			exit(EXIT_FAILURE);
 		y++;
 	}
@@ -88,6 +95,7 @@ void	alloc_nodes(t_data *dat)
 	}
 	dat->cor = new;
 	dat->rot = rot;
+	dat->cam = cam;
 	set_matrix_identity(dat->mat);
 	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
 	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
