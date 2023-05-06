@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/06 19:40:31 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/06 20:07:37 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	place_pixels(t_data *dat, int color)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
-		if (draw_valid_px(dat->img, dat->cam[x][y].x, dat->cam[x][y].y, color) == true)
+		if (draw_valid_px(dat->img, dat->cam[y][x].x, dat->cam[y][x].y, color) == true)
 			pts++;
 		i++;
 	}
@@ -57,8 +57,8 @@ void	convert_3d_2d(t_data *dat)
 		y = i / dat->width;
 		if (dat->rot[y][x].z != 0)
 		{
-			dat->cam[y][x].x = dat->rot[y][x].x / -dat->rot[y][x].z;
-			dat->cam[y][x].y = dat->rot[y][x].y / -dat->rot[y][x].z;
+			dat->cam[y][x].x = dat->rot[y][x].x / dat->rot[y][x].z;
+			dat->cam[y][x].y = dat->rot[y][x].y / dat->rot[y][x].z;
 		}
 		else
 		{
