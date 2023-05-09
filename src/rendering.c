@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/09 18:34:18 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:36:48 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	fill_image(t_data *dat, int color)
 {
 	unsigned int	x;
 	unsigned int	y;
+	//unsigned char	i = 0;
 
 	x = 0;
 	y = 0;
@@ -74,6 +75,8 @@ void	fill_image(t_data *dat, int color)
 		while (x < dat->img->width)
 		{
 			mlx_put_pixel(dat->img, x, y, color);
+			//color += (i & 0xFF) << 8;
+			//i++;
 			x++;
 		}
 		x = 0;

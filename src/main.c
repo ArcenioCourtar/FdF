@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/09 18:43:14 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:22:51 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(dat.mlx, dat.img, 0, 0);
 
 	// MATRIX OPERATIONS
-	printf("%f, %f\n", asin(tan(M_PI/6)), M_PI/4);
 	rot_points(&dat, dat.cor, asin(tan(M_PI/6)), ROT_Z);
 	rot_points(&dat, dat.rot, M_PI/4, ROT_X);
 	convert_3d_2d(&dat);
@@ -106,7 +105,7 @@ int	main(int argc, char **argv)
 	// GRAPHICS
 	fill_image(&dat, COL_BLK);
 	connect_points(&dat);
-	//place_pixels(&dat, COL_RED);
+	// place_pixels(&dat, COL_RED);
 
 	// MLX
 	mlx_loop_hook(dat.mlx, hook_keys, dat.mlx);
