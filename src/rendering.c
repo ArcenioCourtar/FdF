@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/09 18:17:31 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:34:18 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	convert_3d_2d(t_data *dat)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
-		dat->cam[y][x].x = sqrt(3) * dat->rot[y][x].x + -1 * dat->rot[y][x].y + (-1/sqrt(2)) + dat->rot[y][x].z * 10;
-		dat->cam[y][x].y = (-sqrt(3)) * dat->rot[y][x].x + -1 * dat->rot[y][x].y + (-1/sqrt(2)) + dat->rot[y][x].z * 10;
-		dat->cam[y][x].z = 0;
+		dat->cam[y][x].x = dat->rot[y][x].x;
+		dat->cam[y][x].y = dat->rot[y][x].y;
+		dat->cam[y][x].z = dat->rot[y][x].z;
 		i++;
 	}
 }
