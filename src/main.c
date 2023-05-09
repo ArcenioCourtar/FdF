@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/07 19:54:16 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:28:18 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(dat.mlx, dat.img, 0, 0);
 
 	// MATRIX OPERATIONS
-	rot_points(&dat, M_PI, ROT_Z);
+	rot_points(&dat, dat.cor, M_PI, ROT_Z);
 	convert_3d_2d(&dat);
 	move_coords_within_screen(&dat);
 

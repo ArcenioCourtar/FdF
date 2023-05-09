@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:41:38 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/07 19:19:33 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:27:32 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	set_matrix_axis_z(double mat[4][4], double rad)
 	mat[1][1] = cos(rad);
 }
 
-static void	matrix_mult(t_data *dat, int i)
+static void	matrix_mult(t_data *dat, t_coords **src, int i)
 {
 	int			x;
 	int			y;
@@ -87,13 +87,13 @@ static void	matrix_mult(t_data *dat, int i)
 
 	x = i % dat->width;
 	y = i / dat->width;
-	tmp = dat->rot[y][x];
+	tmp = src[y][x];
 	dat->rot[y][x].x = dat->mat[0][0] * tmp.x + dat->mat[0][1] * tmp.y + dat->mat[0][2] * tmp.z;
 	dat->rot[y][x].y = dat->mat[1][0] * tmp.x + dat->mat[1][1] * tmp.y + dat->mat[1][2] * tmp.z;
 	dat->rot[y][x].z = dat->mat[2][0] * tmp.x + dat->mat[2][1] * tmp.y + dat->mat[2][2] * tmp.z;
 }
 
-void	rot_points(t_data *dat, double rad, t_mat rot)
+void	rot_points(t_data *dat, t_coords **src, double rad, t_mat rot)
 {
 	void	(*mat_func[3])(double [4][4], double);
 	int		i;
@@ -106,7 +106,7 @@ void	rot_points(t_data *dat, double rad, t_mat rot)
 	i = 0;
 	while (i < dat->nodes)
 	{
-		matrix_mult(dat, i);
+		matrix_mult(dat, src, i);
 		i++;
 	}
 }

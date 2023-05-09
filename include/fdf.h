@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/07 19:19:58 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:27:53 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef enum e_mat {
 char	*valid_check(int argc, char **argv, int *nodes, int *width);
 void	alloc_nodes(t_data *dat);
 void	set_matrix_identity(double mat[4][4]);
-void	rot_points(t_data *dat, double rad, t_mat rot);
+void	rot_points(t_data *dat, t_coords **src, double rad, t_mat rot);
 void	translate_coords(t_data *dat, t_coords **con, int xs, int ys, int zs);
 void	place_pixels(t_data *dat, int color);
 void	convert_3d_2d(t_data *dat);
