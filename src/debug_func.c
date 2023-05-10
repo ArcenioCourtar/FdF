@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:42:09 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/04 16:07:17 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:44:06 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	debug_print_coords(t_data const *dat)
 		while (x < dat->width)
 		{
 			ft_printf("n: %i, (y*x): %ix%i, x: %i, y: %i, z: %i\n", \
-			(y * dat->width + x), y, x, (int)dat->cor[y][x].x, (int)dat->cor[y][x].y, \
-			(int)dat->cor[y][x].z);
+			(y * dat->width + x), y, x, (int)dat->cor[y][x].x, \
+			(int)dat->cor[y][x].y, (int)dat->cor[y][x].z);
 			x++;
 		}
 		x = 0;

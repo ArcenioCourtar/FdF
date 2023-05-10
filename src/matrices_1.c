@@ -6,53 +6,13 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:41:38 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 15:05:46 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:47:26 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/MLX42/MLX42.h"
 #include "../include/libft.h"
 #include "../include/fdf.h"
-
-void	translate_coords(t_data *dat, t_coords **con, int xs, int ys, int zs)
-{
-	int	i;
-	int	x;
-	int	y;
-
-	i = 0;
-	while (i < dat->nodes)
-	{
-		x = i % dat->width;
-		y = i / dat->width;
-		con[y][x].x += xs;
-		con[y][x].y += ys;
-		con[y][x].z += zs;
-		i++;
-	}
-}
-
-void	set_matrix_identity(double mat[4][4])
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	x = 0;
-	while (y < 4)
-	{
-		while (x < 4)
-		{
-			if (y == x)
-				mat[y][x] = 1;
-			else
-				mat[y][x] = 0;
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-}
 
 static void	set_matrix_axis_x(double mat[4][4], double rad)
 {
@@ -87,9 +47,12 @@ static void	matrix_mult(t_data *dat, t_coords **src, int i)
 	x = i % dat->width;
 	y = i / dat->width;
 	tmp = src[y][x];
-	dat->rot[y][x].x = dat->mat[0][0] * tmp.x + dat->mat[0][1] * tmp.y + dat->mat[0][2] * tmp.z;
-	dat->rot[y][x].y = dat->mat[1][0] * tmp.x + dat->mat[1][1] * tmp.y + dat->mat[1][2] * tmp.z;
-	dat->rot[y][x].z = dat->mat[2][0] * tmp.x + dat->mat[2][1] * tmp.y + dat->mat[2][2] * tmp.z;
+	dat->rot[y][x].x = dat->mat[0][0] * tmp.x + dat->mat[0][1] * tmp.y \
+	+ dat->mat[0][2] * tmp.z;
+	dat->rot[y][x].y = dat->mat[1][0] * tmp.x + dat->mat[1][1] * tmp.y \
+	+ dat->mat[1][2] * tmp.z;
+	dat->rot[y][x].z = dat->mat[2][0] * tmp.x + dat->mat[2][1] * tmp.y \
+	+ dat->mat[2][2] * tmp.z;
 }
 
 void	rot_points(t_data *dat, t_coords **src, double rad, t_mat rot)
@@ -106,23 +69,6 @@ void	rot_points(t_data *dat, t_coords **src, double rad, t_mat rot)
 	while (i < dat->nodes)
 	{
 		matrix_mult(dat, src, i);
-		i++;
-	}
-}
-
-
-void	copy_coords(t_data *dat, t_coords **src, t_coords **dest)
-{
-	int	i;
-	int	x;
-	int	y;
-
-	i = 0;
-	while (i < dat->nodes)
-	{
-		x = i % dat->width;
-		y = i / dat->width;
-		dest[y][x] = src[y][x];
 		i++;
 	}
 }

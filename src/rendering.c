@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 13:21:38 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:50:51 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	place_pixels(t_data *dat, int color)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
-		if (draw_valid_px(dat->img, dat->cam[y][x].x, dat->cam[y][x].y, color) == true)
+		if (draw_valid_px(dat->img, dat->cam[y][x].x, dat->cam[y][x].y, color) \
+		== true)
 			pts++;
 		i++;
 	}
@@ -70,7 +71,6 @@ void	fill_image(t_data *dat, int color)
 	if (((color >> 8) & 0xFF) == ((color >> 16) & 0xFF) \
 	&& ((color >> 8) & 0xFF) == ((color >> 24) & 0xFF))
 	{
-		ft_printf("memset fill\n");
 		ft_memset(dat->img->pixels, (color >> 24) & 0xFF, dat->img->width \
 		* dat->img->height * BPP);
 		x = 3;
@@ -81,7 +81,6 @@ void	fill_image(t_data *dat, int color)
 		}
 		return ;
 	}
-	ft_printf("putpixel fill\n");
 	x = 0;
 	y = 0;
 	while (y < dat->img->height)

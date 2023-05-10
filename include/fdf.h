@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 15:20:02 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:58:45 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	fill_image(t_data *dat, int color);
 void	draw_line(t_data *dat, int x0, int y0, int x1, int y1, int color);
 void	copy_coords(t_data *dat, t_coords **src, t_coords **dest);
 void	connect_points(t_data *dat);
+void	move_coords_within_screen(t_data *dat);
 
 // debug functions
 void	debug_print_coords(t_data const *dat);
