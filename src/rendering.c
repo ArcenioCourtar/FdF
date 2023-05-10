@@ -6,13 +6,15 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 18:59:11 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:32:24 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/MLX42/MLX42.h"
 #include "../include/libft.h"
 #include "../include/fdf.h"
+
+void	draw_line(t_data *dat, t_intcor c0, t_intcor c1); //_3
 
 bool	draw_valid_px(mlx_image_t *img, int x, int y, int color)
 {
@@ -77,62 +79,33 @@ void	fill_image(t_data *dat, int color)
 	}
 }
 
-void	draw_line(t_data *dat, int x0, int y0, int x1, int y1, int color)
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	err2;
-
-	dx = abs(x1 - x0);
-	dy = -abs(y1 - y0);
-	sx = -1;
-	sy = -1;
-	if (x0 < x1)
-		sx = 1;
-	if (y0 < y1)
-		sy = 1;
-	err = dx + dy;
-	while (1)
-	{
-		draw_valid_px(dat->img, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
-			break ;
-		err2 = 2 * err;
-		if (err2 >= dy)
-		{
-			err += dy;
-			x0 += sx;
-		}
-		if (err2 <= dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
-	}
-}
-
 void	connect_points(t_data *dat)
 {
-	int	i;
-	int	x;
-	int	y;
+	int			i;
+	int			x;
+	int			y;
+	t_intcor	c0;
+	t_intcor	c1;
 
 	i = 0;
 	while (i < dat->nodes)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
+		c0.x = dat->cam[y][x].x;
+		c0.y = dat->cam[y][x].y;
 		if (x < dat->width - 1)
-			draw_line(dat, dat->cam[y][x].x, dat->cam[y][x].y, \
-			dat->cam[y][x + 1].x, dat->cam[y][x + 1].y, \
-			dat->cor[y][x + 1].color);
+		{
+			c1.x = dat->cam[y][x + 1].x;
+			c1.y = dat->cam[y][x + 1].y;
+			draw_line(dat, c0, c1);
+		}
 		if (y < (dat->nodes / dat->width) - 1)
-			draw_line(dat, dat->cam[y][x].x, dat->cam[y][x].y, \
-			dat->cam[y + 1][x].x, dat->cam[y + 1][x].y, \
-			dat->cor[y][x + 1].color);
+		{
+			c1.x = dat->cam[y + 1][x].x;
+			c1.y = dat->cam[y + 1][x].y;
+			draw_line(dat, c0, c1);
+		}
 		i++;
 	}
 }

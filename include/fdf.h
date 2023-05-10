@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 18:15:57 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:25:26 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ typedef struct s_lim {
 	int	ymin;
 }	t_lim;
 
+typedef struct s_intcor
+{
+	int	x;
+	int	y;
+}	t_intcor;
+
 
 typedef struct s_coords {
 	double		x;
@@ -78,7 +84,6 @@ void	translate_coords(t_data *dat, t_coords **con, t_mat rot, int t);
 void	place_pixels(t_data *dat, int color);
 void	convert_3d_2d(t_data *dat);
 void	fill_image(t_data *dat, int color);
-void	draw_line(t_data *dat, int x0, int y0, int x1, int y1, int color);
 void	copy_coords(t_data *dat, t_coords **src, t_coords **dest);
 void	connect_points(t_data *dat);
 void	move_coords_within_screen(t_data *dat);
