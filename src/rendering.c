@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/09 19:36:48 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:21:38 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,22 @@ void	fill_image(t_data *dat, int color)
 {
 	unsigned int	x;
 	unsigned int	y;
-	//unsigned char	i = 0;
 
+	if (((color >> 8) & 0xFF) == ((color >> 16) & 0xFF) \
+	&& ((color >> 8) & 0xFF) == ((color >> 24) & 0xFF))
+	{
+		ft_printf("memset fill\n");
+		ft_memset(dat->img->pixels, (color >> 24) & 0xFF, dat->img->width \
+		* dat->img->height * BPP);
+		x = 3;
+		while (x < dat->img->width * dat->img->height * BPP)
+		{
+			ft_memset(dat->img->pixels + x, 255, 1);
+			x += 4;
+		}
+		return ;
+	}
+	ft_printf("putpixel fill\n");
 	x = 0;
 	y = 0;
 	while (y < dat->img->height)
@@ -75,8 +89,6 @@ void	fill_image(t_data *dat, int color)
 		while (x < dat->img->width)
 		{
 			mlx_put_pixel(dat->img, x, y, color);
-			//color += (i & 0xFF) << 8;
-			//i++;
 			x++;
 		}
 		x = 0;
