@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/04 15:59:52 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:38:01 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,28 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
+int	valid_map(char *str, int *width); // parsing_2.c
+
 /*
 	TODO: Norm compliance
 	Handling int over/underflow
 	more rigorous testing of map validity
 */
-
-static int	valid_args(int argc, char **argv)
+static int	valid_args(int argcfd, char **argv)
 {
 	char	*str;
-	int		fd;
 
-	if (argc != 2)
-	{
-		ft_printf("Usage: ./FdF map.fdf\n");
-		exit(EXIT_SUCCESS);
-	}
+	if (argcfd != 2)
+		msg_exit("Usage: ./FdF map.fdf\n", false);
 	if (ft_strlen(argv[1]) < 5)
-	{
-		ft_printf("Invalid file name\n");
-		exit(EXIT_SUCCESS);
-	}
+		msg_exit("Invalid file name\n", false);
 	str = argv[1] + (ft_strlen(argv[1]) - 4);
 	if (ft_strncmp(str, ".fdf", 4) != 0)
-	{
-		ft_printf("Invalid file name\n");
-		exit(EXIT_SUCCESS);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		perror(argv[0]);
-		exit(EXIT_SUCCESS);
-	}
-	return (fd);
+		msg_exit("Invalid file name\n", false);
+	argcfd = open(argv[1], O_RDONLY);
+	if (argcfd == -1)
+		msg_exit(argv[0], true);
+	return (argcfd);
 }
 
 static char	*concat_str(char *old, char buffer[1001])
@@ -94,57 +82,6 @@ static char	*read_file(int fd)
 		if (str == NULL)
 			exit(EXIT_FAILURE);
 	}
-}
-
-static int	valid_map(char *str, int *width)
-{
-	int	i;
-	int	col_max;
-	int	col;
-	int	total;
-
-	i = 0;
-	col_max = -1;
-	col = 0;
-	total = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == ' ')
-			i++;
-		else if ((str[i] == '-' || str[i] == '+') && ft_isdigit(str[i + 1]))
-			i++;
-		else if (ft_isdigit(str[i]))
-		{
-			if (i == 0 || str[i - 1] == ' ' || str[i - 1] == '-' \
-			|| str[i - 1] == '+' || str[i - 1] == '\n')
-			{
-				col++;
-				total++;
-			}
-			i++;
-		}
-		else if (str[i] == '\n')
-		{
-			if (col_max == -1)
-			{
-				col_max = col;
-				*width = col_max;
-			}
-			else if (col_max != col)
-			{
-				ft_printf("Wrong cols. expect: %i, found: %i\n", col_max, col);
-				exit(EXIT_SUCCESS);
-			}
-			col = 0;
-			i++;
-		}
-		else
-		{
-			ft_printf("incorrect formatting\n");
-			exit(EXIT_FAILURE);
-		}
-	}
-	return (total);
 }
 
 /* 
