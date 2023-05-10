@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:41:38 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/09 18:27:32 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:05:46 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	translate_coords(t_data *dat, t_coords **con, int xs, int ys, int zs)
 		con[y][x].x += xs;
 		con[y][x].y += ys;
 		con[y][x].z += zs;
-		con[y][x].w = 1;
 		i++;
 	}
 }

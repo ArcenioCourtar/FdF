@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 14:11:40 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:20:02 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_coords {
 	double	x;
 	double	y;
 	double	z;
-	double	w;
+	int		color;
 }	t_coords;
 
 typedef enum e_mat {

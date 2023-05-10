@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 14:52:34 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:23:37 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	move_coords_within_screen(t_data *dat)
 
 /*
 	NO GLOBAL VARIABLES!!!!!
-	transformation order: SCALE, ROTATE, TRANSLATE
 */
 int	main(int argc, char **argv)
 {	
@@ -97,7 +96,7 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(dat.mlx, dat.img, 0, 0);
 
 	// MATRIX OPERATIONS
-	rot_points(&dat, dat.cor, asin(tan(M_PI/6)), ROT_Z);
+	rot_points(&dat, dat.cor, asin(tan(M_PI/5)), ROT_Z);
 	rot_points(&dat, dat.rot, M_PI/4, ROT_X);
 	convert_3d_2d(&dat);
 	move_coords_within_screen(&dat);

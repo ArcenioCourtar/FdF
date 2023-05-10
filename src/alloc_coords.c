@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/06 19:10:41 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:20:29 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static t_coords	calc_coords(t_data *dat, int x, int y)
 	numflag = 0;
 	new.x = x * 10;
 	new.y = y * 10;
-	new.w = 1;
 	while (1)
 	{
 		if (dat->str[s] == '-' || dat->str[s] == '+' || ft_isdigit(dat->str[s]))
@@ -39,63 +38,67 @@ static t_coords	calc_coords(t_data *dat, int x, int y)
 			numflag = 1;
 		}
 		else if (numflag == 1 && !ft_isdigit(dat->str[s]))
-		{
-			str_num[strpos] = '\0';
 			break ;
-		}
 		s++;
 	}
+	str_num[strpos] = '\0';
 	new.z = ft_atoi(str_num);
 	return (new);
 }
 
-void	alloc_nodes(t_data *dat)
+static void	alloc_rows(t_data *dat)
 {
-	t_coords	**new;
-	t_coords	**rot;
-	t_coords	**cam;
-	int			y;
-	int			x;
+	int	y;
 
-	new = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
-	if (new == NULL)
-		exit(EXIT_FAILURE);
-	rot = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
-	if (rot == NULL)
-		exit(EXIT_FAILURE);
-	cam = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
-	if (cam == NULL)
-		exit(EXIT_FAILURE);
 	y = 0;
 	while (y < dat->nodes / dat->width)
 	{
-		new[y] = malloc(sizeof(t_coords) * dat->width);
-		if (new == NULL)
+		dat->cor[y] = malloc(sizeof(t_coords) * dat->width);
+		if (dat->cor[y] == NULL)
 			exit(EXIT_FAILURE);
-		rot[y] = malloc(sizeof(t_coords) * dat->width);
-		if (rot == NULL)
+		dat->rot[y] = malloc(sizeof(t_coords) * dat->width);
+		if (dat->rot[y] == NULL)
 			exit(EXIT_FAILURE);
-		cam[y] = malloc(sizeof(t_coords) * dat->width);
-		if (cam == NULL)
+		dat->cam[y] = malloc(sizeof(t_coords) * dat->width);
+		if (dat->cam[y] == NULL)
 			exit(EXIT_FAILURE);
 		y++;
 	}
+}
+
+static void	fill_nodes(t_data *dat)
+{
+	int	y;
+	int	x;
+
 	y = 0;
 	x = 0;
 	while (y < dat->nodes / dat->width)
 	{
 		while (x < dat->width)
 		{
-			new[y][x] = calc_coords(dat, x, y);
-			rot[y][x] = new[y][x];
+			dat->cor[y][x] = calc_coords(dat, x, y);
+			dat->rot[y][x] = dat->cor[y][x];
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	dat->cor = new;
-	dat->rot = rot;
-	dat->cam = cam;
+}
+
+void	alloc_nodes(t_data *dat)
+{
+	dat->cor = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
+	if (dat->cor == NULL)
+		exit(EXIT_FAILURE);
+	dat->rot = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
+	if (dat->rot == NULL)
+		exit(EXIT_FAILURE);
+	dat->cam = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));
+	if (dat->cam == NULL)
+		exit(EXIT_FAILURE);
+	alloc_rows(dat);
+	fill_nodes(dat);
 	set_matrix_identity(dat->mat);
 	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
 	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
