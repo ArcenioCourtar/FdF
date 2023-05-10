@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:46:10 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 16:41:53 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:52:42 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,24 @@ void	copy_coords(t_data *dat, t_coords **src, t_coords **dest)
 		x = i % dat->width;
 		y = i / dat->width;
 		dest[y][x] = src[y][x];
+		i++;
+	}
+}
+
+void	convert_3d_2d(t_data *dat)
+{
+	int	i;
+	int	x;
+	int	y;
+
+	i = 0;
+	while (i < dat->nodes)
+	{
+		x = i % dat->width;
+		y = i / dat->width;
+		dat->cam[y][x].x = dat->rot[y][x].x;
+		dat->cam[y][x].y = dat->rot[y][x].y;
+		dat->cam[y][x].z = dat->rot[y][x].z;
 		i++;
 	}
 }

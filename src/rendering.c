@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 15:50:51 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:59:11 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 bool	draw_valid_px(mlx_image_t *img, int x, int y, int color)
 {
-	if (x >= 0 && y >= 0 && (uint32_t)x < img->width && (uint32_t)y < img->height)
+	if (x >= 0 && y >= 0 && (uint32_t)x < img->width \
+	&& (uint32_t)y < img->height)
 	{
 		mlx_put_pixel(img, x, y, color);
 		return (true);
@@ -29,58 +30,39 @@ void	place_pixels(t_data *dat, int color)
 	int	i;
 	int	x;
 	int	y;
-	int	pts;
 
 	i = 0;
-	pts = 0;
 	while (i < dat->nodes)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
-		if (draw_valid_px(dat->img, dat->cam[y][x].x, dat->cam[y][x].y, color) \
-		== true)
-			pts++;
+		draw_valid_px(dat->img, dat->cam[y][x].x, dat->cam[y][x].y, color);
 		i++;
 	}
-	ft_printf("total pts: %i, pts on screen: %i\n", dat->nodes, pts);
 }
 
-void	convert_3d_2d(t_data *dat)
+void	fill_memset(t_data *dat, int color)
 {
-	int	i;
-	int	x;
-	int	y;
+	uint32_t	i;
 
-	i = 0;
-	while (i < dat->nodes)
+	ft_memset(dat->img->pixels, (color >> 24) & 0xFF, dat->img->width \
+	* dat->img->height * BPP);
+	i = 3;
+	while (i < dat->img->width * dat->img->height * BPP)
 	{
-		x = i % dat->width;
-		y = i / dat->width;
-		dat->cam[y][x].x = dat->rot[y][x].x;
-		dat->cam[y][x].y = dat->rot[y][x].y;
-		dat->cam[y][x].z = dat->rot[y][x].z;
-		i++;
+		ft_memset(dat->img->pixels + i, 255, 1);
+		i += 4;
 	}
 }
 
 void	fill_image(t_data *dat, int color)
 {
-	unsigned int	x;
-	unsigned int	y;
+	uint32_t	x;
+	uint32_t	y;
 
 	if (((color >> 8) & 0xFF) == ((color >> 16) & 0xFF) \
 	&& ((color >> 8) & 0xFF) == ((color >> 24) & 0xFF))
-	{
-		ft_memset(dat->img->pixels, (color >> 24) & 0xFF, dat->img->width \
-		* dat->img->height * BPP);
-		x = 3;
-		while (x < dat->img->width * dat->img->height * BPP)
-		{
-			ft_memset(dat->img->pixels + x, 255, 1);
-			x += 4;
-		}
-		return ;
-	}
+		return (fill_memset(dat, color));
 	x = 0;
 	y = 0;
 	while (y < dat->img->height)
@@ -145,10 +127,12 @@ void	connect_points(t_data *dat)
 		y = i / dat->width;
 		if (x < dat->width - 1)
 			draw_line(dat, dat->cam[y][x].x, dat->cam[y][x].y, \
-			dat->cam[y][x + 1].x, dat->cam[y][x + 1].y, COL_WHT);
+			dat->cam[y][x + 1].x, dat->cam[y][x + 1].y, \
+			dat->cor[y][x + 1].color);
 		if (y < (dat->nodes / dat->width) - 1)
 			draw_line(dat, dat->cam[y][x].x, dat->cam[y][x].y, \
-			dat->cam[y + 1][x].x, dat->cam[y + 1][x].y, COL_WHT);
+			dat->cam[y + 1][x].x, dat->cam[y + 1][x].y, \
+			dat->cor[y][x + 1].color);
 		i++;
 	}
 }

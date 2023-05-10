@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 16:42:15 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:15:57 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define COL_WHT	0xFFFFFFFFu
 # define COL_RED	0xFF0000FFu
 # define COL_GRN	0x00FF00FFu
+# define COL_GRY	0x888888FFu
 # define COL_BLU	0x0000FFFFu
 # define COL_YEL	0xFFFF00FFu
 # define COL_BLK	0x000000FFu
@@ -57,10 +58,10 @@ typedef struct s_lim {
 
 
 typedef struct s_coords {
-	double	x;
-	double	y;
-	double	z;
-	int		color;
+	double		x;
+	double		y;
+	double		z;
+	uint32_t	color;
 }	t_coords;
 
 typedef enum e_mat {
@@ -81,6 +82,7 @@ void	draw_line(t_data *dat, int x0, int y0, int x1, int y1, int color);
 void	copy_coords(t_data *dat, t_coords **src, t_coords **dest);
 void	connect_points(t_data *dat);
 void	move_coords_within_screen(t_data *dat);
+void	msg_exit(const char *msg, bool useperr);
 
 // debug functions
 void	debug_print_coords(t_data const *dat);
