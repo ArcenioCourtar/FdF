@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:41:38 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 15:47:26 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:39:29 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	rot_points(t_data *dat, t_coords **src, double rad, t_mat rot)
 	void	(*mat_func[3])(double [4][4], double);
 	int		i;
 
-	mat_func[ROT_X] = set_matrix_axis_x;
-	mat_func[ROT_Y] = set_matrix_axis_y;
-	mat_func[ROT_Z] = set_matrix_axis_z;
+	mat_func[AXIS_X] = set_matrix_axis_x;
+	mat_func[AXIS_Y] = set_matrix_axis_y;
+	mat_func[AXIS_Z] = set_matrix_axis_z;
 	set_matrix_identity(dat->mat);
 	mat_func[rot](dat->mat, rad);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:58:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 16:22:01 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:45:22 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	move_coords_within_screen(t_data *dat)
 		lim_calc(dat->cam, &lim, y, x);
 		i++;
 	}
-	translate_coords(dat, dat->cam, -lim.xmin, -lim.ymin, 0);
+	translate_coords(dat, dat->cam, AXIS_X, -lim.xmin);
+	translate_coords(dat, dat->cam, AXIS_Y, -lim.ymin);
 	scale_screen_coords(dat, lim);
 }

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:46:10 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 15:47:35 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:41:53 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
-void	translate_coords(t_data *dat, t_coords **con, int xs, int ys, int zs)
+void	translate_coords(t_data *dat, t_coords **con, t_mat rot, int t)
 {
 	int	i;
 	int	x;
@@ -25,9 +25,12 @@ void	translate_coords(t_data *dat, t_coords **con, int xs, int ys, int zs)
 	{
 		x = i % dat->width;
 		y = i / dat->width;
-		con[y][x].x += xs;
-		con[y][x].y += ys;
-		con[y][x].z += zs;
+		if (rot == AXIS_X)
+			con[y][x].x += t;
+		else if (rot == AXIS_Y)
+			con[y][x].y += t;
+		else if (rot == AXIS_Z)
+			con[y][x].z += t;
 		i++;
 	}
 }

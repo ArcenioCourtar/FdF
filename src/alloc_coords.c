@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 15:20:29 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:03:13 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	fill_nodes(t_data *dat)
 		while (x < dat->width)
 		{
 			dat->cor[y][x] = calc_coords(dat, x, y);
+			dat->cor[y][x].color = COL_WHT;
 			dat->rot[y][x] = dat->cor[y][x];
 			x++;
 		}
