@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/09 19:22:51 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:52:34 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,12 @@ int	main(int argc, char **argv)
 	// GRAPHICS
 	fill_image(&dat, COL_BLK);
 	connect_points(&dat);
-	// place_pixels(&dat, COL_RED);
+	place_pixels(&dat, COL_RED);
 
 	// MLX
 	mlx_loop_hook(dat.mlx, hook_keys, dat.mlx);
 	mlx_loop(dat.mlx);
+	// 56 byte leak after calling this function (on WSL at least). why?
 	mlx_terminate(dat.mlx);
-	return (0);
+	exit(EXIT_SUCCESS);
 }
