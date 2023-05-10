@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 19:25:26 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:43:07 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ typedef struct s_lim {
 
 typedef struct s_intcor
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	uint32_t	color;
 }	t_intcor;
 
 

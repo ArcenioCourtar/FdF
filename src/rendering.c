@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 19:32:24 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:43:41 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,19 @@ void	connect_points(t_data *dat)
 		y = i / dat->width;
 		c0.x = dat->cam[y][x].x;
 		c0.y = dat->cam[y][x].y;
+		c0.color = dat->cor[y][x].color;
 		if (x < dat->width - 1)
 		{
 			c1.x = dat->cam[y][x + 1].x;
 			c1.y = dat->cam[y][x + 1].y;
+			c1.color = dat->cor[y][x + 1].color;
 			draw_line(dat, c0, c1);
 		}
 		if (y < (dat->nodes / dat->width) - 1)
 		{
 			c1.x = dat->cam[y + 1][x].x;
 			c1.y = dat->cam[y + 1][x].y;
+			c1.color = dat->cor[y + 1][x].color;
 			draw_line(dat, c0, c1);
 		}
 		i++;
