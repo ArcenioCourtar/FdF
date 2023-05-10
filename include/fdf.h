@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/09 18:27:53 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:11:40 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define COL_BLU	0x0000FFFFu
 # define COL_YEL	0xFFFF00FFu
 # define COL_BLK	0x000000FFu
+# define M_PI		3.14159265358979323846	/* pi */
+# define M_PI_2		1.57079632679489661923	/* pi/2 */
+# define M_PI_4		0.78539816339744830962	/* pi/4 */
+# define M_1_PI		0.31830988618379067154	/* 1/pi */
+# define M_2_PI		0.63661977236758134308	/* 2/pi */
 # include "MLX42/MLX42.h"
 # include <stddef.h>
 # include <math.h>		// all math functions
