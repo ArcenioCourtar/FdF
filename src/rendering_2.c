@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:58:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 16:45:22 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/13 14:28:18 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,9 @@ void	move_coords_within_screen(t_data *dat)
 	translate_coords(dat, dat->cam, AXIS_X, -lim.xmin);
 	translate_coords(dat, dat->cam, AXIS_Y, -lim.ymin);
 	scale_screen_coords(dat, lim);
+}
+
+uint32_t	get_color(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
 }

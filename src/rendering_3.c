@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:09:32 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 22:56:15 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:14:42 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	draw_down(t_data *dat, t_intcor c0, t_intcor c1)
 	int	d;
 	int	y;
 	int	x;
+	// int	diff;
 
 	dx = c1.x - c0.x;
 	dy = c1.y - c0.y;

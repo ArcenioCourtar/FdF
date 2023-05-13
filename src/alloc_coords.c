@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 18:55:21 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/13 14:27:51 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	fill_nodes(t_data *dat)
 		while (x < dat->width)
 		{
 			dat->cor[y][x] = calc_coords(dat, x, y);
-			dat->cor[y][x].color = rand() % 0xFFFFFFFFu;
+			dat->cor[y][x].color = get_color(rand() % 255, rand() % 255, rand() % 255, 255);
 			dat->rot[y][x] = dat->cor[y][x];
 			x++;
 		}
