@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 19:43:07 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/13 14:28:35 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	copy_coords(t_data *dat, t_coords **src, t_coords **dest);
 void	connect_points(t_data *dat);
 void	move_coords_within_screen(t_data *dat);
 void	msg_exit(const char *msg, bool useperr);
+
+uint32_t	get_color(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
 
 // debug functions
 void	debug_print_coords(t_data const *dat);
