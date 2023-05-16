@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:09:32 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/16 16:49:48 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:25:48 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,27 @@
 
 bool	draw_valid_px(mlx_image_t *img, int x, int y, int color); // rendering
 
-void	get_diff(int col0, int col1, float diff[4], int len)
+void	save_col(int col0, int col1, int col[2][4])
 {
-	if (len == 0)
-	{
-		diff[0] = 0;
-		diff[1] = 0;
-		diff[2] = 0;
-		diff[3] = 0;
-		return ;
-	}
-	diff[0] = (((col0 >> 24) & 0xFF) - ((col1 >> 24) & 0xFF)) / len;
-	diff[1] = (((col0 >> 16) & 0xFF) - ((col1 >> 16) & 0xFF)) / len;
-	diff[2] = (((col0 >> 8) & 0xFF) - ((col1 >> 8) & 0xFF)) / len;
-	diff[3] = (((col0) & 0xFF) - ((col1) & 0xFF)) / len;
+	col[0][0] = (col0 >> 24) & 0xFF;
+	col[0][1] = (col0 >> 16) & 0xFF;
+	col[0][2] = (col0 >> 8) & 0xFF;
+	col[0][3] = (col0) & 0xFF;
+	col[1][0] = (col1 >> 24) & 0xFF;
+	col[1][1] = (col1 >> 16) & 0xFF;
+	col[1][2] = (col1 >> 8) & 0xFF;
+	col[1][3] = (col1) & 0xFF;
 }
 
-int	col_fade(int col0, float diff[4])
+int	new_col(int col[2][4], int len, int i)
 {
-	int	diffint[4];
+	int	new_col[4];
 
-	diffint[0] = ((col0 >> 24) & 0xFF) + (diff[0]);
-	diffint[1] = ((col0 >> 16) & 0xFF) + (diff[1]);
-	diffint[2] = ((col0 >> 8) & 0xFF) + (diff[2]);
-	diffint[3] = ((col0) & 0xFF) + (diff[3]);
-
-	return (diffint[0] << 24 | diffint[1] << 16 | diffint[2] << 8 | diffint[3]);
+	new_col[0] = col[0][0] + ((col[1][0] - col[0][0]) * i / len);
+	new_col[1] = col[0][1] + ((col[1][1] - col[0][1]) * i / len);
+	new_col[2] = col[0][2] + ((col[1][2] - col[0][2]) * i / len);
+	new_col[3] = col[0][3] + ((col[1][3] - col[0][3]) * i / len);
+	return (new_col[0] << 24 | new_col[1] << 16 | new_col[2] << 8 | new_col[3]);
 }
 
 void	draw_down(t_data *dat, t_intcor c0, t_intcor c1)
@@ -52,7 +47,7 @@ void	draw_down(t_data *dat, t_intcor c0, t_intcor c1)
 	int	d;
 	int	y;
 	int	x;
-	float	diff[4];
+	int	col[2][4];
 
 	dx = c1.x - c0.x;
 	dy = c1.y - c0.y;
@@ -65,10 +60,10 @@ void	draw_down(t_data *dat, t_intcor c0, t_intcor c1)
 	d = (2 * dy) - dx;
 	y = c0.y;
 	x = c0.x;
-	get_diff(c0.color, c1.color, diff, c1.x - c0.x);
+	save_col(c0.color, c1.color, col);
 	while (x < c1.x)
 	{
-		c0.color = col_fade(c0.color, diff);
+		c0.color = new_col(col, c1.x - c0.x, x - c0.x);
 		draw_valid_px(dat->img, x, y, c0.color);
 		if (d > 0)
 		{
@@ -89,7 +84,7 @@ void	draw_up(t_data *dat, t_intcor c0, t_intcor c1)
 	int	d;
 	int	x;
 	int	y;
-	float	diff[4];
+	int	col[2][4];
 
 	dx = c1.x - c0.x;
 	dy = c1.y - c0.y;
@@ -102,10 +97,10 @@ void	draw_up(t_data *dat, t_intcor c0, t_intcor c1)
 	d = (2 * dx) - dy;
 	x = c0.x;
 	y = c0.y;
-	get_diff(c0.color, c1.color, diff, c1.y - c0.y);
+	save_col(c0.color, c1.color, col);
 	while (y < c1.y)
 	{
-		c0.color = col_fade(c0.color, diff);
+		c0.color = new_col(col, c1.y - c0.y, y - c0.y);
 		draw_valid_px(dat->img, x, y, c0.color);
 		if (d > 0)
 		{

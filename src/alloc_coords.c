@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/15 17:55:24 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:20:05 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static t_coords	calc_coords(t_data *dat, int x, int y)
 
 	strpos = 0;
 	numflag = 0;
-	new.x = x * 1;
-	new.y = y * 1;
+	new.x = x * 10;
+	new.y = y * 10;
 	while (1)
 	{
 		if (dat->str[s] == '-' || dat->str[s] == '+' || ft_isdigit(dat->str[s]))
