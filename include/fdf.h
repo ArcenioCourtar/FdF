@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/13 14:28:35 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:14:46 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_intcor
 	uint32_t	color;
 }	t_intcor;
 
-
 typedef struct s_coords {
 	double		x;
 	double		y;
@@ -76,6 +75,13 @@ typedef enum e_mat {
 	AXIS_Y,
 	AXIS_Z
 }	t_mat;
+
+typedef struct e_col {
+	int	red;
+	int	grn;
+	int	blu;
+	int	alp;
+}	t_col;
 
 char	*valid_check(int argc, char **argv, int *nodes, int *width);
 void	alloc_nodes(t_data *dat);
