@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:46:10 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 17:52:42 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:09:01 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	convert_3d_2d(t_data *dat)
 		dat->cam[y][x].x = dat->rot[y][x].x;
 		dat->cam[y][x].y = dat->rot[y][x].y;
 		dat->cam[y][x].z = dat->rot[y][x].z;
+		dat->cam[y][x].color = dat->cor[y][x].color;
 		i++;
 	}
 }

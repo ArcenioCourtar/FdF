@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/16 16:51:56 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:10:33 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void	hook_keys(void *param)
 		mlx_close_window(mlx);
 }
 
-/*
-	NO GLOBAL VARIABLES!!!!!
-	56 byte leak after calling mlx_terminate() (on WSL at least). why?
-*/
 int	main(int argc, char **argv)
 {	
 	t_data		dat;

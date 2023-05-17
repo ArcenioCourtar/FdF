@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering.c                                        :+:      :+:    :+:   */
+/*   render_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:02:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/13 14:11:37 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:03:27 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/MLX42/MLX42.h"
 #include "../include/libft.h"
 #include "../include/fdf.h"
-
-void	draw_line(t_data *dat, t_intcor c0, t_intcor c1); //_3
 
 bool	draw_valid_px(mlx_image_t *img, int x, int y, int color)
 {
@@ -27,23 +25,7 @@ bool	draw_valid_px(mlx_image_t *img, int x, int y, int color)
 	return (false);
 }
 
-void	place_pixels(t_data *dat, int color)
-{
-	int	i;
-	int	x;
-	int	y;
-
-	i = 0;
-	while (i < dat->nodes)
-	{
-		x = i % dat->width;
-		y = i / dat->width;
-		draw_valid_px(dat->img, dat->cam[y][x].x, dat->cam[y][x].y, color);
-		i++;
-	}
-}
-
-void	fill_memset(t_data *dat, int color)
+static void	fill_memset(t_data *dat, int color)
 {
 	uint32_t	i;
 
@@ -76,39 +58,5 @@ void	fill_image(t_data *dat, int color)
 		}
 		x = 0;
 		y++;
-	}
-}
-
-void	connect_points(t_data *dat)
-{
-	int			i;
-	int			x;
-	int			y;
-	t_intcor	c0;
-	t_intcor	c1;
-
-	i = 0;
-	while (i < dat->nodes)
-	{
-		x = i % dat->width;
-		y = i / dat->width;
-		c0.x = dat->cam[y][x].x;
-		c0.y = dat->cam[y][x].y;
-		c0.color = dat->cor[y][x].color;
-		if (x < dat->width - 1)
-		{
-			c1.x = dat->cam[y][x + 1].x;
-			c1.y = dat->cam[y][x + 1].y;
-			c1.color = dat->cor[y][x + 1].color;
-			draw_line(dat, c0, c1);
-		}
-		if (y < (dat->nodes / dat->width) - 1)
-		{
-			c1.x = dat->cam[y + 1][x].x;
-			c1.y = dat->cam[y + 1][x].y;
-			c1.color = dat->cor[y + 1][x].color;
-			draw_line(dat, c0, c1);
-		}
-		i++;
 	}
 }

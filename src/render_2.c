@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering_2.c                                      :+:      :+:    :+:   */
+/*   render_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:58:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/13 14:28:18 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:07:19 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	scale_screen_coords(t_data *dat, t_lim lim)
 	int		y;
 	int		x;
 
-	xscale = (double)WIDTH / (lim.xmax - lim.xmin);
-	yscale = (double)HEIGHT / (lim.ymax - lim.ymin);
+	xscale = (double)dat->img->width / (lim.xmax - lim.xmin);
+	yscale = (double)dat->img->height / (lim.ymax - lim.ymin);
 	i = 0;
 	while (i < dat->nodes)
 	{

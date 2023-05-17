@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/16 15:14:46 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:35:03 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,31 +76,41 @@ typedef enum e_mat {
 	AXIS_Z
 }	t_mat;
 
-typedef struct e_col {
-	int	red;
-	int	grn;
-	int	blu;
-	int	alp;
-}	t_col;
+typedef struct s_drawline {
+	int	dx;
+	int	dy;
+	int	i;
+	int	d;
+	int	x;
+	int	y;
+}	t_drawline;
 
-char	*valid_check(int argc, char **argv, int *nodes, int *width);
-void	alloc_nodes(t_data *dat);
-void	set_matrix_identity(double mat[4][4]);
-void	rot_points(t_data *dat, t_coords **src, double rad, t_mat rot);
-void	translate_coords(t_data *dat, t_coords **con, t_mat rot, int t);
-void	place_pixels(t_data *dat, int color);
-void	convert_3d_2d(t_data *dat);
-void	fill_image(t_data *dat, int color);
-void	copy_coords(t_data *dat, t_coords **src, t_coords **dest);
-void	connect_points(t_data *dat);
-void	move_coords_within_screen(t_data *dat);
-void	msg_exit(const char *msg, bool useperr);
+// currently unused
+// typedef struct e_col {
+// 	int	red;
+// 	int	grn;
+// 	int	blu;
+// 	int	alp;
+// }	t_col;
+
+char		*valid_check(int argc, char **argv, int *nodes, int *width);
+void		alloc_nodes(t_data *dat);
+void		set_matrix_identity(double mat[4][4]);
+void		rot_points(t_data *dat, t_coords **src, double rad, t_mat rot);
+void		translate_coords(t_data *dat, t_coords **con, t_mat rot, int t);
+void		place_pixels(t_data *dat, int color);
+void		convert_3d_2d(t_data *dat);
+void		fill_image(t_data *dat, int color);
+void		copy_coords(t_data *dat, t_coords **src, t_coords **dest);
+void		connect_points(t_data *dat);
+void		move_coords_within_screen(t_data *dat);
+void		msg_exit(const char *msg, bool useperr);
 
 uint32_t	get_color(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
 
 // debug functions
-void	debug_print_coords(t_data const *dat);
-void	debug_print_map(t_data const *dat);
-void	debug_print_info(t_data const *dat);
+void		debug_print_coords(t_data const *dat);
+void		debug_print_map(t_data const *dat);
+void		debug_print_info(t_data const *dat);
 
 #endif
