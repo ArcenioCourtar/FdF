@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/16 18:20:05 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:01:24 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,28 @@
 #include "../include/fdf.h"
 
 /*
-	TODO: implement overflow/underflow checks here?
+	Assigns values to each node, and checks for oevrflows.
+	Might need some extra checking at the end of it all.
 */
+static void	assign_coords(t_coords *new, int x, int y, char const *str)
+{
+	long	tmp;
+
+	tmp = x * DISTX;
+	if (tmp > INT_MAX || tmp < INT_MIN)
+		msg_exit("int overflow\n", false);
+	new->x = tmp;
+	tmp = y * DISTY;
+	if (tmp > INT_MAX || tmp < INT_MIN)
+		msg_exit("int overflow\n", false);
+	new->y = tmp;
+	tmp = ft_atol(str);
+	if (tmp > INT_MAX || tmp < INT_MIN)
+		msg_exit("int overflow\n", false);
+	new->z = tmp;
+}
+
+// Sets up the string to atoi
 static t_coords	calc_coords(t_data *dat, int x, int y)
 {
 	static int	s = 0;
@@ -27,8 +47,6 @@ static t_coords	calc_coords(t_data *dat, int x, int y)
 
 	strpos = 0;
 	numflag = 0;
-	new.x = x * 10;
-	new.y = y * 10;
 	while (1)
 	{
 		if (dat->str[s] == '-' || dat->str[s] == '+' || ft_isdigit(dat->str[s]))
@@ -42,10 +60,11 @@ static t_coords	calc_coords(t_data *dat, int x, int y)
 		s++;
 	}
 	str_num[strpos] = '\0';
-	new.z = ft_atoi(str_num);
+	assign_coords(&new, x, y, str_num);
 	return (new);
 }
 
+// Allocate memory equal to the amount of x coords for each y coord
 static void	alloc_rows(t_data *dat)
 {
 	int	y;
@@ -66,6 +85,7 @@ static void	alloc_rows(t_data *dat)
 	}
 }
 
+// Add correct values to each node's cooridnates.
 static void	fill_nodes(t_data *dat)
 {
 	int	y;
@@ -87,6 +107,9 @@ static void	fill_nodes(t_data *dat)
 	}
 }
 
+// Allocate memory for the nodes, and any other struct members.
+// Start with allocating memory for pointers equal to the # of y coords.
+// This ensures that I'm reading sequential memory when going through my data.
 void	alloc_nodes(t_data *dat)
 {
 	dat->cor = malloc(sizeof(t_coords *) * (dat->nodes / dat->width));

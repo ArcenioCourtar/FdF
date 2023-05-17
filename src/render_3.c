@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:09:32 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 16:08:00 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:31:59 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ bool	draw_valid_px(mlx_image_t *img, int x, int y, int color); // rendering
 void	draw_down(t_data *dat, t_intcor c0, t_intcor c1);
 void	draw_up(t_data *dat, t_intcor c0, t_intcor c1); // drawline_help
 
+// Change how I draw the lines based on which octant the second point is 
+// located in.
 static void	draw_line(t_data *dat, t_intcor c0, t_intcor c1)
 {
 	if (abs(c1.y - c0.y) < abs(c1.x - c0.x))
@@ -36,6 +38,7 @@ static void	draw_line(t_data *dat, t_intcor c0, t_intcor c1)
 	}
 }
 
+// assign coordinates to my struct
 static void	assign_intcor(t_coords **coords, t_intcor *c, int y, int x)
 {
 	c->x = coords[y][x].x;
@@ -43,6 +46,8 @@ static void	assign_intcor(t_coords **coords, t_intcor *c, int y, int x)
 	c->color = coords[y][x].color;
 }
 
+// After finding the coordinates of all points, connect them with lines using
+// Bresenham's line algorithm.
 void	connect_points(t_data *dat)
 {
 	int			i;

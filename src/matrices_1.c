@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:41:38 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 16:39:29 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:18:32 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	set_matrix_axis_z(double mat[4][4], double rad)
 	mat[1][1] = cos(rad);
 }
 
+// Calculation that's performed after setting up the rotation matrix.
 static void	matrix_mult(t_data *dat, t_coords **src, int i)
 {
 	int			x;
@@ -55,6 +56,7 @@ static void	matrix_mult(t_data *dat, t_coords **src, int i)
 	+ dat->mat[2][2] * tmp.z;
 }
 
+// Rotate coordinates stored in "src" around a certain axis.
 void	rot_points(t_data *dat, t_coords **src, double rad, t_mat rot)
 {
 	void	(*mat_func[3])(double [4][4], double);

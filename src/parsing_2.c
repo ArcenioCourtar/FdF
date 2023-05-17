@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:43 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 17:40:40 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:08:55 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	column_check(int *col_max, int *col, int *width, int *i)
 	(*i)++;
 }
 
-void	inc_count(char *str, int *i, int *col, int *total)
+static void	inc_count(char *str, int *i, int *col, int *total)
 {
 	if (*i == 0 || str[*i - 1] == ' ' || str[*i - 1] == '-' \
 	|| str[*i - 1] == '+' || str[*i - 1] == '\n')
@@ -38,6 +38,8 @@ void	inc_count(char *str, int *i, int *col, int *total)
 	(*i)++;
 }
 
+// Checks if the amount of elements, and the content of the map, are valid.
+// -- Currently does NOT handle maps with color information! --
 int	valid_map(char *str, int *width)
 {
 	int	i;

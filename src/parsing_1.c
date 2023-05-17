@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/10 17:38:01 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:06:52 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 int	valid_map(char *str, int *width); // parsing_2.c
 
 /*
-	TODO: Norm compliance
-	Handling int over/underflow
-	more rigorous testing of map validity
+	TODO: more rigorous testing of map validity
 */
 static int	valid_args(int argcfd, char **argv)
 {

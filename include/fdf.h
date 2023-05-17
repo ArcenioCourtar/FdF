@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 15:35:03 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:19:15 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define BUFFSIZ	1000
 # define WIDTH		1024
 # define HEIGHT		1024
+# define DISTX		10
+# define DISTY		10
 # define COL_WHT	0xFFFFFFFFu
 # define COL_RED	0xFF0000FFu
 # define COL_GRN	0x00FF00FFu
@@ -30,6 +32,8 @@
 # define M_2_PI		0.63661977236758134308	/* 2/pi */
 # include "MLX42/MLX42.h"
 # include <stddef.h>
+# include <float.h>		// defines related to doubles and floats
+# include <limits.h>
 # include <math.h>		// all math functions
 # include <fcntl.h>		// open()
 # include <unistd.h>	// close(), read(), write()

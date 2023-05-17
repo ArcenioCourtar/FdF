@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 16:10:33 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:37:19 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	hook_keys(void *param)
 		mlx_close_window(mlx);
 }
 
+// REMOVE THE rand() CALLS BEFORE EVALS!
 int	main(int argc, char **argv)
 {	
 	t_data		dat;
@@ -34,7 +35,7 @@ int	main(int argc, char **argv)
 	rot_points(&dat, dat.rot, M_PI / 4, AXIS_X);
 	convert_3d_2d(&dat);
 	move_coords_within_screen(&dat);
-	fill_image(&dat, COL_BLK);
+	fill_image(&dat, COL_WHT);
 	connect_points(&dat);
 	mlx_loop_hook(dat.mlx, hook_keys, dat.mlx);
 	mlx_loop(dat.mlx);

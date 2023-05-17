@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:43:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 16:08:23 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:36:08 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 bool	draw_valid_px(mlx_image_t *img, int x, int y, int color); // rendering
 
+// Save the bytes representing the 4 color channels of the two points.
 static void	save_col(int col0, int col1, int col[2][4])
 {
 	col[0][0] = (col0 >> 24) & 0xFF;
@@ -28,6 +29,8 @@ static void	save_col(int col0, int col1, int col[2][4])
 	col[1][3] = (col1) & 0xFF;
 }
 
+// Calculate the color of each point in the lines by calculating the difference
+// between each channel, then comparing how far along the line you are
 static int	new_col(int col[2][4], int len, int i)
 {
 	int	new_col[4];
@@ -49,6 +52,7 @@ static int	new_col(int col[2][4], int len, int i)
 	| new_col[2] << 8 | new_col[3]);
 }
 
+// initialize the values used for Bresenham's line algorithm.
 static void	init_val(t_drawline *val, t_intcor c0, t_intcor c1, bool drawdown)
 {
 	val->dx = c1.x - c0.x;
@@ -76,6 +80,7 @@ static void	init_val(t_drawline *val, t_intcor c0, t_intcor c1, bool drawdown)
 	val->x = c0.x;
 }
 
+// Algorithm for lines moving downward
 void	draw_down(t_data *dat, t_intcor c0, t_intcor c1)
 {
 	t_drawline	val;
@@ -98,6 +103,7 @@ void	draw_down(t_data *dat, t_intcor c0, t_intcor c1)
 	}
 }
 
+// Algorithm for lines moving upward
 void	draw_up(t_data *dat, t_intcor c0, t_intcor c1)
 {
 	t_drawline	val;

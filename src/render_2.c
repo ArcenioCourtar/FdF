@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:58:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 16:07:19 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:24:19 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
+// Scale down screen coordinates so the entire map fits on screen.
 static void	scale_screen_coords(t_data *dat, t_lim lim)
 {
 	double	xscale;
@@ -43,6 +44,7 @@ static void	scale_screen_coords(t_data *dat, t_lim lim)
 	}
 }
 
+// Calculate the highest and lowest y and x screen coordinate.
 static void	lim_calc(t_coords **cam, t_lim *lim, int y, int x)
 {
 	if (cam[y][x].x < lim->xmin)
@@ -55,6 +57,8 @@ static void	lim_calc(t_coords **cam, t_lim *lim, int y, int x)
 		lim->ymax = cam[y][x].y;
 }
 
+// After projecting the coordinates to isometric, they need to be scaled down
+// so it fits inside of the window we create.
 void	move_coords_within_screen(t_data *dat)
 {
 	int		y;
@@ -81,6 +85,7 @@ void	move_coords_within_screen(t_data *dat)
 	scale_screen_coords(dat, lim);
 }
 
+// Function that allows easy assignment of colors.
 uint32_t	get_color(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
