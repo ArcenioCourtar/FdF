@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:43 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 18:08:55 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/20 16:53:09 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	inc_count(char *str, int *i, int *col, int *total)
 
 // Checks if the amount of elements, and the content of the map, are valid.
 // -- Currently does NOT handle maps with color information! --
-int	valid_map(char *str, int *width)
+void	valid_map(char *str, t_data *dat)
 {
 	int	i;
 	int	col_max;
@@ -60,9 +60,9 @@ int	valid_map(char *str, int *width)
 		else if (ft_isdigit(str[i]))
 			inc_count(str, &i, &col, &total);
 		else if (str[i] == '\n')
-			column_check(&col_max, &col, width, &i);
+			column_check(&col_max, &col, &dat->width, &i);
 		else
 			msg_exit("incorrect format\n", false);
 	}
-	return (total);
+	dat->nodes = total;
 }

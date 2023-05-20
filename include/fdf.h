@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 18:19:15 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:44:32 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_data {
 	char			*str;
 	int				nodes;
 	int				width;
+	int				argc;
+	char			**argv;
 	double			mat[4][4];
 }	t_data;
 
@@ -97,7 +99,7 @@ typedef struct s_drawline {
 // 	int	alp;
 // }	t_col;
 
-char		*valid_check(int argc, char **argv, int *nodes, int *width);
+void		valid_check(int argc, char **argv, t_data *dat);
 void		alloc_nodes(t_data *dat);
 void		set_matrix_identity(double mat[4][4]);
 void		rot_points(t_data *dat, t_coords **src, double rad, t_mat rot);
