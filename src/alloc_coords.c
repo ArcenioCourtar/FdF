@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/20 17:45:42 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:57:33 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,28 +106,8 @@ static void	fill_nodes(t_data *dat)
 	}
 }
 
-void	color_default(t_data *dat)
+void	color_nodes(t_data *dat)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	x = 0;
-	while (y < dat->nodes / dat->width)
-	{
-		while (x < dat->width)
-		{
-			dat->cor[y][x].color = COL_WHT;
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-}
-
-void	color_rand(t_data *dat)
-{
-	// uint32_t rnum;
 	int	y;
 	int	x;
 
@@ -143,16 +123,6 @@ void	color_rand(t_data *dat)
 		x = 0;
 		y++;
 	}
-}
-
-void	color_nodes(t_data *dat)
-{
-	if (dat->argc != 3)
-		color_default(dat);
-	else if (dat->argc == 3 && ft_strncmp(dat->argv[2], "RAINBOW", 7) == 0)
-		color_rand(dat);
-	else
-		color_default(dat);
 }
 
 // Allocate memory for the nodes, and any other struct members.
@@ -171,6 +141,7 @@ void	alloc_nodes(t_data *dat)
 		exit(EXIT_FAILURE);
 	alloc_rows(dat);
 	fill_nodes(dat);
+	color_nodes(dat);
 	set_matrix_identity(dat->mat);
 	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
 	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
