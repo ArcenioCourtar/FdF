@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/20 17:57:33 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:05:18 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,76 @@ static void	assign_coords(t_coords *new, int x, int y, char const *str)
 	new->z = tmp;
 }
 
+static void	convert_hex_helper(t_coords *new, const char *str_hex, int len)
+{
+	int			i;
+	int			j;
+	uint32_t	result;
+	char		*hex_chars;
+
+	i = 0;
+	result = 0;
+	hex_chars = "0123456789ABCDEF";
+	while (i < len)
+	{
+		j = 0;
+		while (str_hex[i] != hex_chars[j])
+			j++;
+		result += j * pow(16, 7 - i);
+		i++;
+	}
+	while (i < 8)
+	{
+		result += 15 * pow(16, 7 - i);
+		i++;
+	}
+	new->color = result;
+}
+
+static bool	valid_hex(t_coords *new, const char *str, int len)
+{
+	char	str_hex[9];
+	int		i;
+
+	if (len > 8 || len == 0)
+		return (false);
+	ft_memcpy(str_hex, str, len);
+	str_hex[len] = '\0';
+	i = 0;
+	while (i < len)
+	{
+		if (ft_strchr("0123456789ABCDEF", str_hex[i]) == NULL)
+			return (false);
+		i++;
+	}
+	convert_hex_helper(new, str_hex, len);
+	return (true);
+}
+
+static void	assign_col(t_coords *new, char *str, int *s)
+{
+	int	start;
+
+	if (str[*s] != ',')
+	{
+		new->color = COL_WHT;
+		(*s)++;
+	}
+	else
+	{
+		start = *s + 1;
+		while (str[*s] != ' ' && str[*s] != '\0' && str[*s] != '\n')
+			(*s)++;
+		if (ft_strncmp(&str[start], "0x", 2) == 0)
+		{
+			if (!valid_hex(new, &str[start + 2], *s - start - 2))
+				new->color = COL_WHT;
+		}
+		else
+			new->color = COL_WHT;
+	}
+}
+
 // Sets up the string to atoi
 static t_coords	calc_coords(t_data *dat, int x, int y)
 {
@@ -61,6 +131,7 @@ static t_coords	calc_coords(t_data *dat, int x, int y)
 	}
 	str_num[strpos] = '\0';
 	assign_coords(&new, x, y, str_num);
+	assign_col(&new, dat->str, &s);
 	return (new);
 }
 
@@ -141,7 +212,6 @@ void	alloc_nodes(t_data *dat)
 		exit(EXIT_FAILURE);
 	alloc_rows(dat);
 	fill_nodes(dat);
-	color_nodes(dat);
 	set_matrix_identity(dat->mat);
 	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
 	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
