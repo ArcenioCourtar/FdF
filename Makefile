@@ -6,7 +6,7 @@
 #    By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 18:53:47 by acourtar          #+#    #+#              #
-#    Updated: 2023/05/17 16:09:34 by acourtar         ###   ########.fr        #
+#    Updated: 2023/05/23 16:40:41 by acourtar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= $(DIR_BIN)FdF
 LIBFT		= $(DIR_LIB)libft.a
 MLX			= $(DIR_LIB)libmlx42.a
 CFLAGS		= -Wall -Werror -Wextra
-SRCFILES	= main.c parsing_1.c parsing_2.c alloc_coords.c debug_func.c \
+SRCFILES	= main.c parsing_1.c parsing_2.c alloc_coords_1.c alloc_coords_2.c \
 			matrices_1.c matrices_2.c render_1.c render_2.c \
 			render_3.c err_handling.c render_helper_drawline.c
 			
