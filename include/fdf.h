@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/22 19:50:16 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:58:30 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define COL_BLU	0x0000FFFFu
 # define COL_GRY	0x888888FFu
 # define COL_YEL	0xFFFF00FFu
+# define COL_PUR	0xFF00FFFFu
 # define COL_BLK	0x000000FFu
 # define M_PI		3.14159265358979323846	/* pi */
 # define M_PI_2		1.57079632679489661923	/* pi/2 */

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/22 20:05:18 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:58:12 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ static void	convert_hex_helper(t_coords *new, const char *str_hex, int len)
 
 	i = 0;
 	result = 0;
-	hex_chars = "0123456789ABCDEF";
+	hex_chars = "0123456789ABCDEFabcdef";
 	while (i < len)
 	{
 		j = 0;
 		while (str_hex[i] != hex_chars[j])
 			j++;
+		if (j > 15)
+			j -= 6;
 		result += j * pow(16, 7 - i);
 		i++;
 	}
@@ -74,7 +76,7 @@ static bool	valid_hex(t_coords *new, const char *str, int len)
 	i = 0;
 	while (i < len)
 	{
-		if (ft_strchr("0123456789ABCDEF", str_hex[i]) == NULL)
+		if (ft_strchr("0123456789ABCDEFabcdef", str_hex[i]) == NULL)
 			return (false);
 		i++;
 	}
