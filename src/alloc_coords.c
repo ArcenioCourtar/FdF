@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/23 13:58:12 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:43:34 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,18 @@ static void	assign_coords(t_coords *new, int x, int y, char const *str)
 	new->z = tmp;
 }
 
-static void	convert_hex_helper(t_coords *new, const char *str_hex, int len)
+static uint32_t	full_input(const char *str_hex, char *hex_char, int len)
 {
 	int			i;
 	int			j;
 	uint32_t	result;
-	char		*hex_chars;
 
 	i = 0;
 	result = 0;
-	hex_chars = "0123456789ABCDEFabcdef";
 	while (i < len)
 	{
 		j = 0;
-		while (str_hex[i] != hex_chars[j])
+		while (str_hex[i] != hex_char[j])
 			j++;
 		if (j > 15)
 			j -= 6;
@@ -61,13 +59,50 @@ static void	convert_hex_helper(t_coords *new, const char *str_hex, int len)
 		result += 15 * pow(16, 7 - i);
 		i++;
 	}
-	new->color = result;
+	return (result);
+}
+
+static uint32_t	half_input(const char *str_hex, char *hex_char, int len)
+{
+	int			i;
+	int			j;
+	uint32_t	result;
+
+	i = 0;
+	result = 0;
+	while (i < len)
+	{
+		j = 0;
+		while (str_hex[i] != hex_char[j])
+			j++;
+		if (j > 15)
+			j -= 6;
+		result += j * pow(16, len - i + 2);
+		i++;
+	}
+	while (i < 6)
+	{
+		result += 0 * pow(16, i + 2);
+		i++;
+	}
+	result += 15 * pow(16, 1);
+	result += 15 * pow(16, 0);
+	return (result);
+}
+
+static void	convert_hex(t_coords *new, char *str_hex, char *hex_char, int len)
+{
+	if (len > 5)
+		new->color = full_input(str_hex, hex_char, len);
+	else
+		new->color = half_input(str_hex, hex_char, len);
 }
 
 static bool	valid_hex(t_coords *new, const char *str, int len)
 {
-	char	str_hex[9];
-	int		i;
+	static char	*hex_char = "0123456789ABCDEFabcdef";
+	char		str_hex[9];
+	int			i;
 
 	if (len > 8 || len == 0)
 		return (false);
@@ -76,11 +111,11 @@ static bool	valid_hex(t_coords *new, const char *str, int len)
 	i = 0;
 	while (i < len)
 	{
-		if (ft_strchr("0123456789ABCDEFabcdef", str_hex[i]) == NULL)
+		if (ft_strchr(hex_char, str_hex[i]) == NULL)
 			return (false);
 		i++;
 	}
-	convert_hex_helper(new, str_hex, len);
+	convert_hex(new, str_hex, hex_char, len);
 	return (true);
 }
 
