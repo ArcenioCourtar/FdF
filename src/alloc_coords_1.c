@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 17:04:47 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:59:54 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
-void	assign_col(t_coords *new, char *str, int *s); // _2.c
+void	assign_col(t_data *dat, t_coords *new, int *s);	// _2.c
+void	color_height(t_data *dat);						// _extra.c
 
 /*
 	Assigns values to each node, and checks for oevrflows.
@@ -63,7 +64,7 @@ static t_coords	calc_coords(t_data *dat, int x, int y)
 	}
 	str_num[strpos] = '\0';
 	assign_coords(&new, x, y, str_num);
-	assign_col(&new, dat->str, &s);
+	assign_col(dat, &new, &s);
 	return (new);
 }
 
@@ -113,29 +114,6 @@ static void	fill_nodes(t_data *dat)
 	}
 }
 
-void	color_height(t_data *dat)
-{
-	int	i;
-	int	y;
-	int	x;
-
-	i = 0;
-	while (i < dat->nodes)
-	{
-		y = i / dat->width;
-		x = i % dat->width;
-		if (dat->cor[y][x].z > 0)
-			dat->cor[y][x].color = get_color(dat->cor[y][x].z * 255 / dat->zmax\
-			,(dat->zmax - dat->cor[y][x].z) * 255 / dat->zmax, 0, 255);
-		else if (dat->cor[y][x].z < 0)
-			dat->cor[y][x].color = get_color(0, (dat->zmin - dat->cor[y][x].z) \
-			* 255 / dat->zmin, dat->cor[y][x].z * 255 / dat->zmin, 255);
-		else
-			dat->cor[y][x].color = COL_GRN;
-		i++;
-	}
-}
-
 // Allocate memory for the nodes, and any other struct members.
 // Start with allocating memory for pointers equal to the # of y coords.
 // This ensures that I'm reading sequential memory when going through my data.
@@ -154,7 +132,8 @@ void	alloc_nodes(t_data *dat)
 	dat->zmax = 0;
 	dat->zmin = 0;
 	fill_nodes(dat);
-	color_height(dat);
+	if (dat->argc == 3 && ft_strncmp(dat->argv[2], "HEIGHT", 6) == 0)
+		color_height(dat);
 	set_matrix_identity(dat->mat);
 	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
 	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);

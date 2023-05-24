@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:38:53 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:39:49 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:57:50 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ static bool	valid_hex(t_coords *new, const char *str, int len)
 	return (true);
 }
 
-void	assign_col(t_coords *new, char *str, int *s)
+void	assign_col(t_data *dat, t_coords *new, int *s)
 {
 	int	start;
 
-	if (str[*s] != ',')
+	if (dat->str[*s] != ',')
 	{
 		new->color = COL_WHT;
 		(*s)++;
@@ -109,14 +109,18 @@ void	assign_col(t_coords *new, char *str, int *s)
 	else
 	{
 		start = *s + 1;
-		while (str[*s] != ' ' && str[*s] != '\0' && str[*s] != '\n')
+		while (dat->str[*s] != ' ' && dat->str[*s] != '\0' \
+		&& dat->str[*s] != '\n')
 			(*s)++;
-		if (ft_strncmp(&str[start], "0x", 2) == 0)
+		if (!(dat->argc == 3 && ft_strncmp(dat->argv[2], "HEIGHT", 6) == 0))
 		{
-			if (!valid_hex(new, &str[start + 2], *s - start - 2))
+			if (ft_strncmp(&dat->str[start], "0x", 2) == 0)
+			{
+				if (!valid_hex(new, &dat->str[start + 2], *s - start - 2))
+					new->color = COL_WHT;
+			}
+			else
 				new->color = COL_WHT;
 		}
-		else
-			new->color = COL_WHT;
 	}
 }
