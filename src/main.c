@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/23 18:07:39 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:05:04 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,9 @@ void	scale_coords(t_data *dat, double scale)
 	}
 }
 
-void	hook_keys(void *param)
+// maybe put in limit to movement?
+void	keys_movemap(mlx_t *mlx, t_data *dat)
 {
-	mlx_t	*mlx;
-	t_data	*dat;
-
-	dat = param;
-	mlx = dat->mlx;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 	{
 		translate_coords(dat, dat->cam, AXIS_Y, -2);
@@ -64,6 +58,11 @@ void	hook_keys(void *param)
 		fill_image(dat, COL_BLK);
 		connect_points(dat);
 	}
+}
+
+// Maybe limit zooming?
+void	keys_zoommap(mlx_t *mlx, t_data *dat)
+{
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
 		scale_coords(dat, 1.01);
@@ -76,6 +75,19 @@ void	hook_keys(void *param)
 		fill_image(dat, COL_BLK);
 		connect_points(dat);
 	}
+}
+
+void	hook_keys(void *param)
+{
+	mlx_t	*mlx;
+	t_data	*dat;
+
+	dat = param;
+	mlx = dat->mlx;
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	keys_movemap(mlx, dat);
+	keys_zoommap(mlx, dat);
 }
 
 int	main(int argc, char **argv)
