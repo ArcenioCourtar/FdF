@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 19:46:15 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:54:23 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	valid_args(int argc, char **argv)
 	char	*str;
 
 	if (argc != 2 && argc != 3)
-		msg_exit("Usage: ./FdF map.fdf [OPTION]\n", false);
+		msg_exit("Usage: ./FdF map.fdf [BONUS]\n", false);
 	if (ft_strlen(argv[1]) < 5)
 		msg_exit("Invalid file name\n", false);
 	str = argv[1] + (ft_strlen(argv[1]) - 4);

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 18:59:54 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:54:02 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	alloc_nodes(t_data *dat)
 	dat->zmax = 0;
 	dat->zmin = 0;
 	fill_nodes(dat);
-	if (dat->argc == 3 && ft_strncmp(dat->argv[2], "HEIGHT", 6) == 0)
+	if (dat->argc == 3 && ft_strncmp(dat->argv[2], "BONUS", 6) == 0)
 		color_height(dat);
 	set_matrix_identity(dat->mat);
 	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);

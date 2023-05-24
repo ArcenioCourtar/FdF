@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:38:53 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 19:21:02 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:53:47 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	assign_col(t_data *dat, t_coords *new, int *s)
 		while (dat->str[*s] != ' ' && dat->str[*s] != '\0' \
 		&& dat->str[*s] != '\n')
 			(*s)++;
-		if (!(dat->argc == 3 && ft_strncmp(dat->argv[2], "HEIGHT", 6) == 0))
+		if (!(dat->argc == 3 && ft_strncmp(dat->argv[2], "BONUS", 5) == 0))
 		{
 			if (ft_strncmp(&dat->str[start], "0x", 2) == 0)
 			{
