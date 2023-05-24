@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:46:52 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:22:28 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ typedef struct s_data {
 	struct s_coords	**rot;
 	struct s_coords	**cam;
 	char			*str;
+	char			**argv;
 	int				nodes;
 	int				width;
 	int				argc;
-	char			**argv;
+	int				zmax;
+	int				zmin;
 	double			mat[4][4];
 }	t_data;
 

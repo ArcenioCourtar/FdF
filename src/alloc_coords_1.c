@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:40:19 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:04:47 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,37 @@ static void	fill_nodes(t_data *dat)
 		{
 			dat->cor[y][x] = calc_coords(dat, x, y);
 			dat->rot[y][x] = dat->cor[y][x];
+			if (dat->cor[y][x].z > dat->zmax)
+				dat->zmax = dat->cor[y][x].z;
+			if (dat->cor[y][x].z < dat->zmin)
+				dat->zmin = dat->cor[y][x].z;
 			x++;
 		}
 		x = 0;
 		y++;
+	}
+}
+
+void	color_height(t_data *dat)
+{
+	int	i;
+	int	y;
+	int	x;
+
+	i = 0;
+	while (i < dat->nodes)
+	{
+		y = i / dat->width;
+		x = i % dat->width;
+		if (dat->cor[y][x].z > 0)
+			dat->cor[y][x].color = get_color(dat->cor[y][x].z * 255 / dat->zmax\
+			,(dat->zmax - dat->cor[y][x].z) * 255 / dat->zmax, 0, 255);
+		else if (dat->cor[y][x].z < 0)
+			dat->cor[y][x].color = get_color(0, (dat->zmin - dat->cor[y][x].z) \
+			* 255 / dat->zmin, dat->cor[y][x].z * 255 / dat->zmin, 255);
+		else
+			dat->cor[y][x].color = COL_GRN;
+		i++;
 	}
 }
 
@@ -124,7 +151,10 @@ void	alloc_nodes(t_data *dat)
 	if (dat->cam == NULL)
 		exit(EXIT_FAILURE);
 	alloc_rows(dat);
+	dat->zmax = 0;
+	dat->zmin = 0;
 	fill_nodes(dat);
+	color_height(dat);
 	set_matrix_identity(dat->mat);
 	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
 	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
