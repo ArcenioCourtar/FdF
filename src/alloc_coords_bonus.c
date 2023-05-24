@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:46:12 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 18:40:38 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:23:51 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
+// These functions aren't needed but look more clean than handling the 
+// calculations within get_color()
 static uint32_t	pos_high(double z, int zmax)
 {
 	uint32_t	res1;
@@ -34,6 +36,11 @@ static uint32_t	pos_low(double z, int zmin)
 	return (get_color(0, res2, res1, 255));
 }
 
+// BONUS
+// If "HEIGHT" is passed as a third argument, ignores any possible
+// colors in the map data and assigns height based on height.
+// Anything with a Z value above 0 will color red, anything below 0 will
+// be blue, increasing in intensity based on the highest/lowest Z coord.
 void	color_height(t_data *dat)
 {
 	int	i;

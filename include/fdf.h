@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 16:22:28 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:40:36 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,6 @@ typedef struct s_drawline {
 	int	y;
 }	t_drawline;
 
-// currently unused
-// typedef struct e_col {
-// 	int	red;
-// 	int	grn;
-// 	int	blu;
-// 	int	alp;
-// }	t_col;
-
 void		valid_check(int argc, char **argv, t_data *dat);
 void		alloc_nodes(t_data *dat);
 void		set_matrix_identity(double mat[4][4]);
@@ -110,16 +102,11 @@ void		translate_coords(t_data *dat, t_coords **con, t_mat rot, int t);
 void		place_pixels(t_data *dat, int color);
 void		convert_3d_2d(t_data *dat);
 void		fill_image(t_data *dat, int color);
-void		copy_coords(t_data *dat, t_coords **src, t_coords **dest);
 void		connect_points(t_data *dat);
 void		move_coords_within_screen(t_data *dat);
 void		msg_exit(const char *msg, bool useperr);
+void		hook_keys(void *param);
 
 uint32_t	get_color(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
-
-// debug functions
-void		debug_print_coords(t_data const *dat);
-void		debug_print_map(t_data const *dat);
-void		debug_print_info(t_data const *dat);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:43:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 18:36:08 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:51:19 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	new_col(int col[2][4], int len, int i)
 	| new_col[2] << 8 | new_col[3]);
 }
 
-// initialize the values used for Bresenham's line algorithm.
+// Initialize the values used for Bresenham's line algorithm.
 static void	init_val(t_drawline *val, t_intcor c0, t_intcor c1, bool drawdown)
 {
 	val->dx = c1.x - c0.x;

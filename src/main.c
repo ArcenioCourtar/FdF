@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 16:05:04 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:39:26 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,82 +14,16 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
-void	scale_coords(t_data *dat, double scale)
-{
-	int	i;
-	int	y;
-	int	x;
-
-	i = 0;
-	while (i < dat->nodes)
-	{
-		x = i % dat->width;
-		y = i / dat->width;
-		dat->cam[y][x].x = dat->cam[y][x].x * scale;
-		dat->cam[y][x].y = dat->cam[y][x].y * scale;
-		i++;
-	}
-}
-
-// maybe put in limit to movement?
-void	keys_movemap(mlx_t *mlx, t_data *dat)
-{
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-	{
-		translate_coords(dat, dat->cam, AXIS_Y, -2);
-		fill_image(dat, COL_BLK);
-		connect_points(dat);
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-	{
-		translate_coords(dat, dat->cam, AXIS_Y, 2);
-		fill_image(dat, COL_BLK);
-		connect_points(dat);
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-	{
-		translate_coords(dat, dat->cam, AXIS_X, 2);
-		fill_image(dat, COL_BLK);
-		connect_points(dat);
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-	{
-		translate_coords(dat, dat->cam, AXIS_X, -2);
-		fill_image(dat, COL_BLK);
-		connect_points(dat);
-	}
-}
-
-// Maybe limit zooming?
-void	keys_zoommap(mlx_t *mlx, t_data *dat)
-{
-	if (mlx_is_key_down(mlx, MLX_KEY_W))
-	{
-		scale_coords(dat, 1.01);
-		fill_image(dat, COL_BLK);
-		connect_points(dat);
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_S))
-	{
-		scale_coords(dat, 0.99);
-		fill_image(dat, COL_BLK);
-		connect_points(dat);
-	}
-}
-
-void	hook_keys(void *param)
-{
-	mlx_t	*mlx;
-	t_data	*dat;
-
-	dat = param;
-	mlx = dat->mlx;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	keys_movemap(mlx, dat);
-	keys_zoommap(mlx, dat);
-}
-
+/*
+	Program flow:
+	Check if the arguments are valid, check if the map is a valid format.
+	Allocate memory and calculate coords and color values (if any).
+	Rotate calculated points to get them in isometric projection,
+	Move these new coordinates within screen boundaries.
+	Fill the mlx image with a single color, then connect all the points
+	with a line drawing algorithm.
+	mlx loop.
+*/
 int	main(int argc, char **argv)
 {	
 	t_data		dat;

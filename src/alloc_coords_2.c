@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:38:53 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 18:57:50 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:21:02 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
+// parse full hex sequences, or sequences of 6 and 7 digits.
+// It will parse the 0xFFFFFFFF in the RBGA order, and any unfilled hex values
+// are set to max. (in this case, only the alpha channel, since I 
+// use different logic when parsing hex codes with less then 6 digits).
 static uint32_t	full_input(const char *str_hex, char *hex_char, int len)
 {
 	int			i;
@@ -40,6 +44,18 @@ static uint32_t	full_input(const char *str_hex, char *hex_char, int len)
 	return (result);
 }
 
+/*
+	Some of the maps 42 provides (t1.fdf and t2.fdf) have incomplete hex codes,
+	on top of using different logic than what I initially expected.
+	If you have a hex number with less than 6 digits it changes the order
+	in which these are interpretted as colors, as well as setting anything
+	not interpretted (except for alpha) to 0.
+	instead of 0xff being red, it's blue.
+	0xff00 is green (as opposed to 0x00ff).
+	0x0000ff is blue again because the rules it established previously do not
+	apply anymore? None of this makes sense to me but I made sure my FdF gets
+	the same colors as the one provided by 42. :) 
+*/
 static uint32_t	half_input(const char *str_hex, char *hex_char, int len)
 {
 	int			i;
@@ -68,6 +84,8 @@ static uint32_t	half_input(const char *str_hex, char *hex_char, int len)
 	return (result);
 }
 
+// Convert the hex representation to whatever the correct value in memory
+// would be.
 static void	convert_hex(t_coords *new, char *str_hex, char *hex_char, int len)
 {
 	if (len > 5)
@@ -76,6 +94,7 @@ static void	convert_hex(t_coords *new, char *str_hex, char *hex_char, int len)
 		new->color = half_input(str_hex, hex_char, len);
 }
 
+// Checks if the sequence after the comma is a valid hex number.
 static bool	valid_hex(t_coords *new, const char *str, int len)
 {
 	static char	*hex_char = "0123456789ABCDEFabcdef";
@@ -97,6 +116,8 @@ static bool	valid_hex(t_coords *new, const char *str, int len)
 	return (true);
 }
 
+// Assigns color based on map data, unless "HEIGHT" is given as third argument.
+// If it encounters a comma but no valid hex sequence it defaults to white.
 void	assign_col(t_data *dat, t_coords *new, int *s)
 {
 	int	start;

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:43 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:36:44 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:50:31 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
+// At the end of a row, checks the amount of columns counted.
+// If this is the top row, col_max get set to the amount of cols counted.
+// From that point onwards the amount of columns in each row get compared
+// to the col_max to check for map validity.
 static void	column_check(int *col_max, int *col, int *width, int *i)
 {
 	if (*col_max == -1)
@@ -27,12 +31,14 @@ static void	column_check(int *col_max, int *col, int *width, int *i)
 	(*i)++;
 }
 
+// skips any symbols found after the "," until another separator is found.
 static void	skip_colors(char *str, int *i)
 {
 	while (str[*i] != ' ' && str[*i] != '\n' && str[*i] != '\0')
 		(*i)++;
 }
 
+// If the first digit of a number is found, increase the col and total count.
 static void	inc_count(char *str, int *i, int *col, int *total)
 {
 	if (*i == 0 || str[*i - 1] == ' ' || str[*i - 1] == '-' \
@@ -46,6 +52,7 @@ static void	inc_count(char *str, int *i, int *col, int *total)
 		skip_colors(str, i);
 }
 
+// Some edge case checks at the end of a file.
 static void	final_check(int col_max, int col, int *width, int total)
 {
 	if (total == 0)

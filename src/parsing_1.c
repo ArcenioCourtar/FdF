@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 18:45:52 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:46:15 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 
 int	valid_map(char *str, t_data *dat); // parsing_2.c
 
-/*
-	TODO: more rigorous testing of map validity
-*/
+// Initial and simple checks for erroneous arguments.
 static int	valid_args(int argc, char **argv)
 {
 	char	*str;
@@ -36,7 +34,8 @@ static int	valid_args(int argc, char **argv)
 	return (argc);
 }
 
-static char	*concat_str(char *old, char buffer[1001])
+// get_next_line() rethread
+static char	*concat_str(char *old, char buffer[BUFFSIZ + 1])
 {
 	char	*new;
 	int		oldlen;
@@ -54,6 +53,7 @@ static char	*concat_str(char *old, char buffer[1001])
 	return (new);
 }
 
+// get_next_line() rethread
 static char	*read_file(int fd)
 {
 	char	buffer[BUFFSIZ + 1];
@@ -84,12 +84,12 @@ static char	*read_file(int fd)
 
 /* 
 	fdf given by 42Schools:
-	Runs without newline after last row.
-	Runs if file name does not end in .fdf.
+	Runs without newline after last row. (KEPT)
+	Runs if file name does not end in .fdf. (CHANGED)
 	Runs regardless of the # of spaces in between numbers,
-	and spaces at the start or end of rows.
+	and spaces at the start or end of rows. (KEPT)
 	Numbers with multiple operators (++1, --1, +-1) lead to undefined behaviour
-	it does not mark it as an invalid map though.
+	it does not mark it as an invalid map though. (CHANGED, UB)
 */
 void	valid_check(int argc, char **argv, t_data *dat)
 {

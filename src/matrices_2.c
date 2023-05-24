@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:46:10 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 15:09:01 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:44:01 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
+// Perform translation on coordinates along a specific axis.
 void	translate_coords(t_data *dat, t_coords **con, t_mat rot, int t)
 {
 	int	i;
@@ -35,6 +36,7 @@ void	translate_coords(t_data *dat, t_coords **con, t_mat rot, int t)
 	}
 }
 
+// Reset the rotation matrix to an identity matrix.
 void	set_matrix_identity(double mat[4][4])
 {
 	int	y;
@@ -57,22 +59,10 @@ void	set_matrix_identity(double mat[4][4])
 	}
 }
 
-void	copy_coords(t_data *dat, t_coords **src, t_coords **dest)
-{
-	int	i;
-	int	x;
-	int	y;
-
-	i = 0;
-	while (i < dat->nodes)
-	{
-		x = i % dat->width;
-		y = i / dat->width;
-		dest[y][x] = src[y][x];
-		i++;
-	}
-}
-
+// No actual conversion to 2d is happening here anymore, 
+// since the rotations prior already result in the correct projection.
+// It's still useful for keeping my "real" rotation coords and 
+// "screen" coords separate.
 void	convert_3d_2d(t_data *dat)
 {
 	int	i;
