@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:09:32 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/29 18:23:32 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:43:20 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ bool	draw_valid_px(mlx_image_t *img, int x, int y, int color); // rendering
 void	draw_gentle_slope(t_data *dat, t_dlcor c0, t_dlcor c1);
 void	draw_steep_slope(t_data *dat, t_dlcor c0, t_dlcor c1); // drawline_help
 
-// Change how I draw the lines based on which octant the second point is 
-// located in.
+// Change how I draw lines based on the distance between each y and x coord.
 static void	draw_line(t_data *dat, t_dlcor c0, t_dlcor c1)
 {
 	if (abs(c1.x - c0.x) > abs(c1.y - c0.y))
@@ -38,7 +37,7 @@ static void	draw_line(t_data *dat, t_dlcor c0, t_dlcor c1)
 	}
 }
 
-// assign coordinates to my struct
+// Assign coordinates to struct used for line drawing algorithm
 static void	assign_intcor(t_coords **coords, t_dlcor *c, int y, int x)
 {
 	c->x = coords[y][x].x;

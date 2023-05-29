@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/29 16:28:21 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:46:26 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 #  define M_PI		3.14159265358979323846	/* pi */
 # endif
 
+// EVAL READY: May 29th 2023
 // Main struct holding the mlx instance, mlx image,
 // node coordinates, and any other important info related to my points.
 typedef struct s_data {

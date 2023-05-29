@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/29 16:19:01 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:43:45 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	valid_check(int argc, char **argv, t_data *dat)
 	fd = valid_args(argc, argv);
 	str = read_file(fd);
 	if (str == NULL)
-		msg_exit("empty file.\n", false);
+		msg_exit("empty file\n", false);
 	valid_map(str, dat);
 	dat->str = str;
 	dat->argc = argc;

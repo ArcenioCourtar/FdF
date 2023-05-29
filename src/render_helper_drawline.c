@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:43:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/29 18:19:21 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:40:48 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,9 @@ void	draw_gentle_slope(t_data *dat, t_dlcor c0, t_dlcor c1)
 		if (val.d > 0)
 		{
 			val.y += val.i;
-			val.d += 2 * (val.dy - val.dx);
+			val.d += 2 * -val.dx;
 		}
-		else
-			val.d += 2 * val.dy;
+		val.d += 2 * val.dy;
 		val.x++;
 	}
 }
@@ -120,10 +119,9 @@ void	draw_steep_slope(t_data *dat, t_dlcor c0, t_dlcor c1)
 		if (val.d > 0)
 		{
 			val.x += val.i;
-			val.d += 2 * (val.dx - val.dy);
+			val.d += 2 * -val.dy;
 		}
-		else
-			val.d += 2 * val.dx;
+		val.d += 2 * val.dx;
 		val.y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:54:23 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 19:39:26 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:46:43 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../include/fdf.h"
 
 /*
+	EVAL READY: May 29th 2023
 	Program flow:
 	Check if the arguments are valid, check if the map is a valid format.
 	Allocate memory and calculate coords and color values (if any).
