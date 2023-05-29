@@ -6,14 +6,14 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 19:40:36 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:56:17 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # define BPP		4
-# define BUFFSIZ	1000
+# define BUFFSIZ	100000 // large buffersize to speed up large map parsing
 # define WIDTH		1024
 # define HEIGHT		1024
 # define DISTX		10

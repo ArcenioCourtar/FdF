@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:40:39 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 19:55:51 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:47:57 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,5 @@ void	alloc_nodes(t_data *dat)
 	set_matrix_identity(dat->mat);
 	dat->mlx = mlx_init(WIDTH, HEIGHT, "FdF", false);
 	dat->img = mlx_new_image(dat->mlx, WIDTH, HEIGHT);
+	free(dat->str);
 }
