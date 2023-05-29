@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:30:48 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 19:54:23 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:19:01 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ static int	valid_args(int argc, char **argv)
 	return (argc);
 }
 
-// get_next_line() rethread
+// get_next_line() rethread.
+// If the input file is larger than the initial buffer,
+// allocate additional space to store the extra content in, copy it over,
+// and free the old buffer.
 static char	*concat_str(char *old, char buffer[BUFFSIZ + 1])
 {
 	char	*new;
@@ -53,7 +56,11 @@ static char	*concat_str(char *old, char buffer[BUFFSIZ + 1])
 	return (new);
 }
 
-// get_next_line() rethread
+// get_next_line() rethread.
+// Read up to BUFFSIZ bytes from the input file, store those in the
+// (stack allocated) buffer, malloc space for the contents of the buffer,
+// and copy over it's contents to the newly allocated space.
+// If the entire map does not fit in ths space, see concat_str();
 static char	*read_file(int fd)
 {
 	char	buffer[BUFFSIZ + 1];

@@ -6,14 +6,14 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:49:11 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/29 15:56:17 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:28:21 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # define BPP		4
-# define BUFFSIZ	100000 // large buffersize to speed up large map parsing
+# define BUFFSIZ	10000 // large buffersize to speed up large map parsing
 # define WIDTH		1024
 # define HEIGHT		1024
 # define DISTX		10
@@ -26,22 +26,22 @@
 # define COL_YEL	0xFFFF00FFu
 # define COL_PUR	0xFF00FFFFu
 # define COL_BLK	0x000000FFu
-# define M_PI		3.14159265358979323846	/* pi */
-# define M_PI_2		1.57079632679489661923	/* pi/2 */
-# define M_PI_4		0.78539816339744830962	/* pi/4 */
-# define M_1_PI		0.31830988618379067154	/* 1/pi */
-# define M_2_PI		0.63661977236758134308	/* 2/pi */
 # include "MLX42/MLX42.h"
 # include <stddef.h>
 # include <float.h>		// defines related to doubles and floats
 # include <limits.h>
-# include <math.h>		// all math functions
 # include <fcntl.h>		// open()
 # include <unistd.h>	// close(), read(), write()
 # include <stdlib.h>	// malloc(), free(), exit()
 # include <stdio.h>		// perror()
 # include <string.h>	// strerror()
+# include <math.h>		// all math functions
+# ifndef M_PI
+#  define M_PI		3.14159265358979323846	/* pi */
+# endif
 
+// Main struct holding the mlx instance, mlx image,
+// node coordinates, and any other important info related to my points.
 typedef struct s_data {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
@@ -58,6 +58,8 @@ typedef struct s_data {
 	double			mat[4][4];
 }	t_data;
 
+// Struct used to save the boundaries of the x and y coords on screen so
+// the final image can be scaled up/down accordingly.
 typedef struct s_lim {
 	int	xmax;
 	int	xmin;
@@ -65,13 +67,16 @@ typedef struct s_lim {
 	int	ymin;
 }	t_lim;
 
-typedef struct s_intcor
+// Struct used to store the coordinates and colors of the points passed to my
+// line drawing functions.
+typedef struct s_dlcor
 {
 	int			x;
 	int			y;
 	uint32_t	color;
-}	t_intcor;
+}	t_dlcor;
 
+// Struct holding the x, y and z coordinates, and colors of all my points.
 typedef struct s_coords {
 	double		x;
 	double		y;
@@ -79,12 +84,15 @@ typedef struct s_coords {
 	uint32_t	color;
 }	t_coords;
 
+// Enum defining the axis we're rotating around.
 typedef enum e_mat {
 	AXIS_X,
 	AXIS_Y,
 	AXIS_Z
 }	t_mat;
 
+// Another struct used for the line drawing functions, all variables necessary
+// are here.
 typedef struct s_drawline {
 	int	dx;
 	int	dy;
@@ -99,7 +107,6 @@ void		alloc_nodes(t_data *dat);
 void		set_matrix_identity(double mat[4][4]);
 void		rot_points(t_data *dat, t_coords **src, double rad, t_mat rot);
 void		translate_coords(t_data *dat, t_coords **con, t_mat rot, int t);
-void		place_pixels(t_data *dat, int color);
 void		convert_3d_2d(t_data *dat);
 void		fill_image(t_data *dat, int color);
 void		connect_points(t_data *dat);

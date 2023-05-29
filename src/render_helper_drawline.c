@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:43:58 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/24 19:51:19 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:19:21 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ static int	new_col(int col[2][4], int len, int i)
 }
 
 // Initialize the values used for Bresenham's line algorithm.
-static void	init_val(t_drawline *val, t_intcor c0, t_intcor c1, bool drawdown)
+static void	init_val(t_drawline *val, t_dlcor c0, t_dlcor c1, bool lowslope)
 {
 	val->dx = c1.x - c0.x;
 	val->dy = c1.y - c0.y;
 	val->i = 1;
-	if (drawdown == true)
+	if (lowslope == true)
 	{
 		if (val->dy < 0)
 		{
@@ -80,8 +80,9 @@ static void	init_val(t_drawline *val, t_intcor c0, t_intcor c1, bool drawdown)
 	val->x = c0.x;
 }
 
-// Algorithm for lines moving downward
-void	draw_down(t_data *dat, t_intcor c0, t_intcor c1)
+// Algorithm for drawing lines with a gentle slope.
+// (The difference between x coords is higher than the diff between y coords.)
+void	draw_gentle_slope(t_data *dat, t_dlcor c0, t_dlcor c1)
 {
 	t_drawline	val;
 	int			col[2][4];
@@ -103,8 +104,9 @@ void	draw_down(t_data *dat, t_intcor c0, t_intcor c1)
 	}
 }
 
-// Algorithm for lines moving upward
-void	draw_up(t_data *dat, t_intcor c0, t_intcor c1)
+// Algorithm for drawing lines with a steep slope.
+// (The difference between y coords is higher than the diff between x coords.)
+void	draw_steep_slope(t_data *dat, t_dlcor c0, t_dlcor c1)
 {
 	t_drawline	val;
 	int			col[2][4];

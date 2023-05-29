@@ -6,7 +6,7 @@
 /*   By: acourtar <acourtar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:09:32 by acourtar          #+#    #+#             */
-/*   Updated: 2023/05/17 18:31:59 by acourtar         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:23:32 by acourtar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,31 @@
 #include "../include/fdf.h"
 
 bool	draw_valid_px(mlx_image_t *img, int x, int y, int color); // rendering
-void	draw_down(t_data *dat, t_intcor c0, t_intcor c1);
-void	draw_up(t_data *dat, t_intcor c0, t_intcor c1); // drawline_help
+void	draw_gentle_slope(t_data *dat, t_dlcor c0, t_dlcor c1);
+void	draw_steep_slope(t_data *dat, t_dlcor c0, t_dlcor c1); // drawline_help
 
 // Change how I draw the lines based on which octant the second point is 
 // located in.
-static void	draw_line(t_data *dat, t_intcor c0, t_intcor c1)
+static void	draw_line(t_data *dat, t_dlcor c0, t_dlcor c1)
 {
-	if (abs(c1.y - c0.y) < abs(c1.x - c0.x))
+	if (abs(c1.x - c0.x) > abs(c1.y - c0.y))
 	{
-		if (c0.x > c1.x)
-			draw_down(dat, c1, c0);
+		if (c1.x > c0.x)
+			draw_gentle_slope(dat, c0, c1);
 		else
-			draw_down(dat, c0, c1);
+			draw_gentle_slope(dat, c1, c0);
 	}
 	else
 	{
-		if (c0.y > c1.y)
-			draw_up(dat, c1, c0);
+		if (c1.y > c0.y)
+			draw_steep_slope(dat, c0, c1);
 		else
-			draw_up(dat, c0, c1);
+			draw_steep_slope(dat, c1, c0);
 	}
 }
 
 // assign coordinates to my struct
-static void	assign_intcor(t_coords **coords, t_intcor *c, int y, int x)
+static void	assign_intcor(t_coords **coords, t_dlcor *c, int y, int x)
 {
 	c->x = coords[y][x].x;
 	c->y = coords[y][x].y;
@@ -53,8 +53,8 @@ void	connect_points(t_data *dat)
 	int			i;
 	int			x;
 	int			y;
-	t_intcor	c0;
-	t_intcor	c1;
+	t_dlcor		c0;
+	t_dlcor		c1;
 
 	i = 0;
 	while (i < dat->nodes)
